@@ -1,11 +1,11 @@
 {
-    "name": "BamBam_tu empleo",
-    "short_name": "BamBam",
+    "name": "Tucan, tu app de oportunidades",
+    "short_name": "Tucan",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#FFFFFF",
-    "theme_color": "#FFFFFF",
-    "description": "A new Flutter project.",
+    "background_color": "#F8F6F0",
+    "theme_color": "#01747A",
+    "description": "Tucan, tu app de oportunidades: empleos, pasantías, becas, cursos y eventos.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
