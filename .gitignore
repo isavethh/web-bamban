@@ -1,7 +1,6 @@
-# Environment variables
+node_modules/
 .env
-*.env
 .env.*
-
-# API keys and secrets
-assets/.env
+!.env.example
+coverage/
+*.log

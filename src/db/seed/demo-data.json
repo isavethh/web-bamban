@@ -1,0 +1,2260 @@
+{
+  "opportunities": [
+    {
+      "id": "t1",
+      "type": "trabajo",
+      "title": "Desarrollador/a Flutter Semi Senior",
+      "organization": "Tigo Bolivia",
+      "publisherType": "empresa",
+      "rubro": "Tecnología",
+      "city": "Santa Cruz de la Sierra",
+      "modality": "Híbrido",
+      "description": "Buscamos un/a desarrollador/a Flutter para el equipo de la app Mi Tigo (más de 2 millones de usuarios). Trabajarás con diseño, backend y QA en ciclos de dos semanas, construyendo funcionalidades de pagos, recargas y atención al cliente. Valoramos código limpio, pruebas automatizadas y ganas de aprender.",
+      "deadlineInDays": 18,
+      "requirements": [
+        "2+ años de experiencia con Flutter y Dart",
+        "Manejo de estado (Provider, Riverpod o Bloc)",
+        "Consumo de APIs REST y manejo de errores",
+        "Publicación de apps en Play Store / App Store",
+        "Deseable: CI/CD con GitHub Actions o Codemagic"
+      ],
+      "benefits": [
+        "Seguro de salud privado",
+        "Plan de datos y equipo corporativo",
+        "2 días de home office por semana",
+        "Presupuesto anual de capacitación (Bs 3.000)"
+      ],
+      "tags": [
+        "Flutter",
+        "Dart",
+        "Mobile",
+        "Fintech"
+      ],
+      "compensation": "Bs 9.000 – 12.000 / mes",
+      "duration": "Tiempo completo · Contrato indefinido",
+      "spots": 2,
+      "contact": "talento@tigo.com.bo",
+      "isFeatured": true,
+      "publishedInDays": -3
+    },
+    {
+      "id": "t2",
+      "type": "trabajo",
+      "title": "Analista Contable Junior",
+      "organization": "Banco Mercantil Santa Cruz",
+      "publisherType": "empresa",
+      "rubro": "Finanzas",
+      "city": "La Paz",
+      "modality": "Presencial",
+      "description": "Apoyarás al área de contabilidad en conciliaciones bancarias, registro de asientos, elaboración de reportes tributarios y cierre mensual. Ideal para recién titulados que buscan una carrera en banca.",
+      "deadlineInDays": 12,
+      "requirements": [
+        "Licenciatura en Contaduría Pública o Auditoría",
+        "Conocimiento de NIIF y normativa tributaria boliviana",
+        "Excel intermedio-avanzado",
+        "Disponibilidad inmediata"
+      ],
+      "benefits": [
+        "Bono de productividad trimestral",
+        "Capacitación interna certificada",
+        "Refrigerio"
+      ],
+      "tags": [
+        "Contabilidad",
+        "NIIF",
+        "Banca"
+      ],
+      "compensation": "Bs 5.500 / mes + bonos",
+      "duration": "Tiempo completo",
+      "spots": 3,
+      "contact": "rrhh@bmsc.com.bo",
+      "isFeatured": false,
+      "publishedInDays": -5
+    },
+    {
+      "id": "t3",
+      "type": "trabajo",
+      "title": "Enfermero/a para Unidad de Terapia Intensiva",
+      "organization": "Clínica Foianini",
+      "publisherType": "empresa",
+      "rubro": "Salud",
+      "city": "Santa Cruz de la Sierra",
+      "modality": "Presencial",
+      "description": "Se requiere personal de enfermería con experiencia en cuidados críticos para UTI de adultos. Trabajo en equipo multidisciplinario con protocolos internacionales de seguridad del paciente.",
+      "deadlineInDays": 9,
+      "requirements": [
+        "Licenciatura en Enfermería con registro profesional",
+        "Experiencia mínima de 1 año en UTI o emergencias",
+        "Certificación BLS/ACLS vigente (deseable)"
+      ],
+      "benefits": [
+        "Seguro de salud familiar",
+        "Uniformes y alimentación",
+        "Plan de carrera interno"
+      ],
+      "tags": [
+        "Enfermería",
+        "UTI",
+        "Salud"
+      ],
+      "compensation": "Bs 6.800 / mes + turnos",
+      "duration": "Tiempo completo · Turnos rotativos",
+      "spots": 4,
+      "isFeatured": false,
+      "publishedInDays": -2
+    },
+    {
+      "id": "t4",
+      "type": "trabajo",
+      "title": "Community Manager & Diseñador/a de contenidos",
+      "organization": "Estudio Kolibrí (freelance)",
+      "publisherType": "profesional",
+      "rubro": "Marketing",
+      "city": "Cochabamba",
+      "modality": "Virtual",
+      "description": "Busco una persona creativa para gestionar redes de 3 marcas de gastronomía: planificación mensual, diseño de piezas en Canva/Illustrator, grabación de reels y reportes de métricas.",
+      "deadlineInDays": 20,
+      "requirements": [
+        "Portafolio de piezas para redes sociales",
+        "Manejo de Meta Business Suite y TikTok",
+        "Redacción creativa en español"
+      ],
+      "benefits": [
+        "Horario flexible",
+        "100% remoto",
+        "Posibilidad de pasar a tiempo completo"
+      ],
+      "tags": [
+        "Redes sociales",
+        "Diseño",
+        "Contenido"
+      ],
+      "compensation": "Bs 3.200 / mes (medio tiempo)",
+      "duration": "Medio tiempo · 6 meses renovable",
+      "spots": 1,
+      "publishedBy": "Patricia Suárez",
+      "isFeatured": false,
+      "publishedInDays": -1
+    },
+    {
+      "id": "t5",
+      "type": "trabajo",
+      "title": "Ingeniero/a Civil Residente de Obra",
+      "organization": "Constructora Aguilar & Asociados",
+      "publisherType": "empresa",
+      "rubro": "Construcción",
+      "city": "El Alto",
+      "modality": "Presencial",
+      "description": "Responsable de la ejecución técnica de un edificio de 12 pisos: control de avance, calidad, seguridad industrial, coordinación de subcontratistas y reportes semanales a gerencia.",
+      "deadlineInDays": 25,
+      "requirements": [
+        "Título de Ingeniero Civil con registro SIB",
+        "3+ años como residente de obra",
+        "Manejo de MS Project, AutoCAD y Excel",
+        "Licencia de conducir categoría B"
+      ],
+      "benefits": [
+        "Movilidad asignada",
+        "Bono por cumplimiento de hitos",
+        "Seguro contra accidentes"
+      ],
+      "tags": [
+        "Ingeniería Civil",
+        "Obra",
+        "Construcción"
+      ],
+      "compensation": "Bs 8.500 / mes",
+      "duration": "Proyecto de 14 meses",
+      "spots": 1,
+      "isFeatured": false,
+      "publishedInDays": -7
+    },
+    {
+      "id": "t6",
+      "type": "trabajo",
+      "title": "Docente de Inglés para Adultos (turno noche)",
+      "organization": "Centro Boliviano Americano",
+      "publisherType": "organizacion",
+      "rubro": "Educación",
+      "city": "Sucre",
+      "modality": "Presencial",
+      "description": "Dictado de clases de inglés niveles B1–C1 para adultos profesionales, con metodología comunicativa y material propio de la institución.",
+      "deadlineInDays": 14,
+      "requirements": [
+        "Certificación C1 o superior (TOEFL/IELTS/Cambridge)",
+        "Experiencia docente de 1 año"
+      ],
+      "benefits": [
+        "Capacitación TESOL gratuita",
+        "Descuentos en cursos para familiares"
+      ],
+      "tags": [
+        "Inglés",
+        "Docencia"
+      ],
+      "compensation": "Bs 45 / hora académica",
+      "duration": "Por horas · 20 h/semana",
+      "spots": 2,
+      "isFeatured": false,
+      "publishedInDays": -4
+    },
+    {
+      "id": "p1",
+      "type": "pasantia",
+      "title": "Pasantía en Desarrollo de Software",
+      "organization": "Jalasoft",
+      "publisherType": "empresa",
+      "rubro": "Tecnología",
+      "city": "Cochabamba",
+      "modality": "Presencial",
+      "description": "Programa intensivo para estudiantes de últimos semestres: capacitación en Java, JavaScript y pruebas automatizadas, seguida de trabajo en proyectos reales con mentoría de ingenieros senior. El 80% de los pasantes son contratados al finalizar.",
+      "deadlineInDays": 15,
+      "requirements": [
+        "Estudiante de Ing. de Sistemas / Informática (7mo semestre en adelante)",
+        "Fundamentos de programación y estructuras de datos",
+        "Inglés técnico (lectura)",
+        "Disponibilidad de 6 horas diarias"
+      ],
+      "benefits": [
+        "Estipendio mensual",
+        "Mentoría 1:1",
+        "Certificado",
+        "Alta probabilidad de contratación"
+      ],
+      "tags": [
+        "Java",
+        "JavaScript",
+        "QA",
+        "Mentoría"
+      ],
+      "compensation": "Estipendio Bs 2.000 / mes",
+      "duration": "6 meses",
+      "startInDays": 30,
+      "spots": 10,
+      "contact": "internships@jalasoft.com",
+      "isFeatured": true,
+      "publishedInDays": -2
+    },
+    {
+      "id": "p2",
+      "type": "pasantia",
+      "title": "Pasantía en Auditoría Externa",
+      "organization": "Deloitte Bolivia",
+      "publisherType": "empresa",
+      "rubro": "Finanzas",
+      "city": "La Paz",
+      "modality": "Híbrido",
+      "description": "Participarás en equipos de auditoría de empresas de los sectores financiero, telecomunicaciones y consumo masivo. Aprenderás metodología internacional, análisis de riesgos y elaboración de papeles de trabajo.",
+      "deadlineInDays": 20,
+      "requirements": [
+        "Estudiante de Contaduría, Auditoría o Ing. Financiera (últimos 2 semestres)",
+        "Promedio igual o mayor a 70/100",
+        "Excel avanzado"
+      ],
+      "benefits": [
+        "Capacitación en NIA",
+        "Laptop corporativa",
+        "Networking con socios de la firma"
+      ],
+      "tags": [
+        "Auditoría",
+        "NIIF",
+        "Big Four"
+      ],
+      "compensation": "Estipendio Bs 1.800 / mes",
+      "duration": "4 meses (temporada de cierre)",
+      "startInDays": 45,
+      "spots": 6,
+      "isFeatured": false,
+      "publishedInDays": -6
+    },
+    {
+      "id": "p3",
+      "type": "pasantia",
+      "title": "Pasantía en Laboratorio Clínico",
+      "organization": "Universidad Mayor de San Simón · Facultad de Bioquímica",
+      "publisherType": "universidad",
+      "rubro": "Salud",
+      "city": "Cochabamba",
+      "modality": "Presencial",
+      "description": "Rotación por las áreas de hematología, bioquímica clínica y microbiología del laboratorio universitario. Incluye participación en un proyecto de investigación sobre resistencia bacteriana.",
+      "deadlineInDays": 10,
+      "requirements": [
+        "Estudiante de Bioquímica o Bioanálisis (8vo semestre+)",
+        "Carnet de vacunas al día"
+      ],
+      "benefits": [
+        "Créditos académicos",
+        "Coautoría en publicación científica",
+        "Certificado universitario"
+      ],
+      "tags": [
+        "Laboratorio",
+        "Investigación",
+        "Bioquímica"
+      ],
+      "compensation": "Sin estipendio · Créditos académicos",
+      "duration": "3 meses",
+      "startInDays": 21,
+      "spots": 8,
+      "isFeatured": false,
+      "publishedInDays": -3
+    },
+    {
+      "id": "p4",
+      "type": "pasantia",
+      "title": "Pasantía en Marketing Digital",
+      "organization": "Farmacorp",
+      "publisherType": "empresa",
+      "rubro": "Marketing",
+      "city": "Santa Cruz de la Sierra",
+      "modality": "Híbrido",
+      "description": "Apoyo al equipo de marketing en campañas digitales, análisis de datos de e-commerce, gestión de comunidad y creación de contenido para la app Farmacorp.",
+      "deadlineInDays": 11,
+      "requirements": [
+        "Estudiante de Marketing, Comunicación o Publicidad",
+        "Manejo de Canva y Meta Ads"
+      ],
+      "benefits": [
+        "Estipendio",
+        "Descuento en farmacias",
+        "Carta de recomendación"
+      ],
+      "tags": [
+        "Marketing",
+        "E-commerce",
+        "Contenido"
+      ],
+      "compensation": "Estipendio Bs 1.500 / mes",
+      "duration": "5 meses",
+      "startInDays": 25,
+      "spots": 3,
+      "isFeatured": false,
+      "publishedInDays": -1
+    },
+    {
+      "id": "p5",
+      "type": "pasantia",
+      "title": "Pasantía en Estudio Jurídico – Derecho Corporativo",
+      "organization": "Estudio Moreno Baldivieso",
+      "publisherType": "empresa",
+      "rubro": "Legal",
+      "city": "La Paz",
+      "modality": "Presencial",
+      "description": "Redacción de contratos, investigación jurídica, apoyo en trámites ante FUNDEMPRESA y SENAPI, y asistencia a reuniones con clientes corporativos.",
+      "deadlineInDays": 22,
+      "requirements": [
+        "Estudiante de Derecho (4to año+)",
+        "Excelente redacción",
+        "Inglés intermedio"
+      ],
+      "benefits": [
+        "Estipendio",
+        "Mentoría de socios",
+        "Posibilidad de contratación"
+      ],
+      "tags": [
+        "Derecho",
+        "Corporativo",
+        "Contratos"
+      ],
+      "compensation": "Estipendio Bs 1.200 / mes",
+      "duration": "6 meses",
+      "startInDays": 35,
+      "spots": 2,
+      "isFeatured": false,
+      "publishedInDays": -8
+    },
+    {
+      "id": "p6",
+      "type": "pasantia",
+      "title": "Pasantía en Gestión Ambiental",
+      "organization": "Fundación Amigos de la Naturaleza (FAN)",
+      "publisherType": "organizacion",
+      "rubro": "Medio ambiente",
+      "city": "Santa Cruz de la Sierra",
+      "modality": "Presencial",
+      "description": "Apoyo en monitoreo de biodiversidad con drones y sensores, sistematización de datos en QGIS y elaboración de reportes para comunidades de la Chiquitania.",
+      "deadlineInDays": 16,
+      "requirements": [
+        "Estudiante de Ing. Ambiental, Biología o Forestal",
+        "Manejo básico de QGIS/ArcGIS"
+      ],
+      "benefits": [
+        "Salidas de campo",
+        "Certificado",
+        "Publicación de datos"
+      ],
+      "tags": [
+        "Ambiental",
+        "GIS",
+        "Campo"
+      ],
+      "compensation": "Estipendio Bs 1.000 / mes + viáticos de campo",
+      "duration": "4 meses",
+      "startInDays": 28,
+      "spots": 4,
+      "isFeatured": false,
+      "publishedInDays": -5
+    },
+    {
+      "id": "b1",
+      "type": "beca",
+      "title": "Beca de Maestría en Ciencia de Datos (100%)",
+      "organization": "Universidad Privada Boliviana (UPB)",
+      "publisherType": "universidad",
+      "rubro": "Tecnología",
+      "city": "Cochabamba",
+      "modality": "Híbrido",
+      "description": "Beca completa para profesionales con excelencia académica interesados en analítica avanzada, machine learning y visualización de datos. Incluye proyecto final con empresas aliadas.",
+      "deadlineInDays": 28,
+      "requirements": [
+        "Título de licenciatura en áreas STEM o Economía",
+        "Promedio mínimo 75/100",
+        "Carta de motivación y 2 cartas de recomendación",
+        "Examen de admisión (lógica y programación básica)"
+      ],
+      "benefits": [
+        "Colegiatura completa",
+        "Acceso a laboratorio de datos",
+        "Bolsa de trabajo con aliados"
+      ],
+      "tags": [
+        "Data Science",
+        "Posgrado",
+        "Beca completa"
+      ],
+      "compensation": "Cobertura 100% de colegiatura (valor Bs 48.000)",
+      "duration": "18 meses",
+      "startInDays": 60,
+      "spots": 5,
+      "contact": "posgrado@upb.edu",
+      "isFeatured": true,
+      "publishedInDays": -4
+    },
+    {
+      "id": "b2",
+      "type": "beca",
+      "title": "Beca DAAD – Maestrías en Alemania (EPOS)",
+      "organization": "Servicio Alemán de Intercambio Académico (DAAD)",
+      "publisherType": "organizacion",
+      "rubro": "Internacional",
+      "city": "Alemania (varias ciudades)",
+      "modality": "Presencial",
+      "description": "Programa para profesionales de países en desarrollo con al menos dos años de experiencia laboral. Más de 40 maestrías en ingeniería, economía, salud pública, medio ambiente y planificación urbana.",
+      "deadlineInDays": 75,
+      "requirements": [
+        "Título universitario (mín. 4 años) con buenas calificaciones",
+        "2 años de experiencia profesional relevante",
+        "Inglés B2/C1 o alemán según programa",
+        "Carta de motivación orientada al desarrollo del país"
+      ],
+      "benefits": [
+        "Manutención mensual",
+        "Pasajes ida y vuelta",
+        "Seguro médico",
+        "Curso de alemán previo"
+      ],
+      "tags": [
+        "Alemania",
+        "Maestría",
+        "Internacional"
+      ],
+      "compensation": "€ 992 mensuales + pasajes + seguro médico",
+      "duration": "12 a 24 meses",
+      "startInDays": 300,
+      "isFeatured": false,
+      "publishedInDays": -10
+    },
+    {
+      "id": "b3",
+      "type": "beca",
+      "title": "Beca Socioeconómica de Pregrado – Ingenierías",
+      "organization": "Universidad Católica Boliviana \"San Pablo\"",
+      "publisherType": "universidad",
+      "rubro": "Ingeniería",
+      "city": "La Paz",
+      "modality": "Presencial",
+      "description": "Becas para bachilleres destacados de colegios fiscales y de convenio que deseen estudiar Ingeniería de Sistemas, Civil, Industrial, Ambiental o Mecatrónica.",
+      "deadlineInDays": 19,
+      "requirements": [
+        "Promedio de colegio ≥ 60/70",
+        "Estudio socioeconómico",
+        "Examen de ingreso aprobado"
+      ],
+      "benefits": [
+        "Colegiatura",
+        "Tutorías académicas",
+        "Acceso a programa de liderazgo"
+      ],
+      "tags": [
+        "Pregrado",
+        "Ingeniería",
+        "Socioeconómica"
+      ],
+      "compensation": "50% – 100% de la colegiatura",
+      "duration": "Toda la carrera (renovable por semestre)",
+      "startInDays": 40,
+      "spots": 30,
+      "isFeatured": false,
+      "publishedInDays": -2
+    },
+    {
+      "id": "b4",
+      "type": "beca",
+      "title": "Beca Google Career Certificates – Soporte TI y Análisis de Datos",
+      "organization": "Google · Fundación Simón I. Patiño",
+      "publisherType": "organizacion",
+      "rubro": "Tecnología",
+      "city": "Todo el país",
+      "modality": "Virtual",
+      "description": "200 becas para completar los certificados profesionales de Google en Coursera. Incluye acompañamiento semanal, comunidad de estudio y feria de empleo al finalizar.",
+      "deadlineInDays": 33,
+      "requirements": [
+        "Mayor de 18 años",
+        "Acceso a internet",
+        "Compromiso de 8 h/semana"
+      ],
+      "benefits": [
+        "Certificado oficial de Google",
+        "Mentoría",
+        "Feria de empleo con 20 empresas"
+      ],
+      "tags": [
+        "Google",
+        "Certificación",
+        "Virtual"
+      ],
+      "compensation": "Certificación gratuita (valor US$ 300)",
+      "duration": "6 meses (a tu ritmo)",
+      "spots": 200,
+      "isFeatured": false,
+      "publishedInDays": -6
+    },
+    {
+      "id": "b5",
+      "type": "beca",
+      "title": "Beca de Investigación en Salud Pública",
+      "organization": "Organización Panamericana de la Salud (OPS)",
+      "publisherType": "organizacion",
+      "rubro": "Salud",
+      "city": "La Paz",
+      "modality": "Híbrido",
+      "description": "Financiamiento para jóvenes profesionales de la salud que desarrollen un proyecto de investigación aplicada en enfermedades transmitidas por vectores o salud materna.",
+      "deadlineInDays": 24,
+      "requirements": [
+        "Título en Medicina, Enfermería, Bioquímica o Salud Pública",
+        "Propuesta de investigación (máx. 5 páginas)"
+      ],
+      "benefits": [
+        "Financiamiento",
+        "Tutoría de expertos OPS",
+        "Presentación en congreso regional"
+      ],
+      "tags": [
+        "Investigación",
+        "Salud pública",
+        "OPS"
+      ],
+      "compensation": "US$ 800 mensuales durante 6 meses",
+      "duration": "6 meses",
+      "startInDays": 50,
+      "spots": 4,
+      "isFeatured": false,
+      "publishedInDays": -9
+    },
+    {
+      "id": "b6",
+      "type": "beca",
+      "title": "Beca de Inglés Intensivo para Profesionales",
+      "organization": "Alianza Cultural Boliviano-Británica",
+      "publisherType": "organizacion",
+      "rubro": "Idiomas",
+      "city": "Cochabamba",
+      "modality": "Presencial",
+      "description": "Programa becado de inglés intensivo con enfoque en entrevistas laborales, presentaciones y redacción profesional. Preparación para IELTS incluida en el último módulo.",
+      "deadlineInDays": 13,
+      "requirements": [
+        "Profesional titulado o egresado",
+        "Examen de nivelación"
+      ],
+      "benefits": [
+        "Material incluido",
+        "Simulacro de IELTS",
+        "Certificado"
+      ],
+      "tags": [
+        "Inglés",
+        "IELTS"
+      ],
+      "compensation": "80% de descuento (pagas Bs 200 / módulo)",
+      "duration": "4 módulos de 6 semanas",
+      "spots": 25,
+      "isFeatured": false,
+      "publishedInDays": -3
+    },
+    {
+      "id": "c1",
+      "type": "curso",
+      "title": "Bootcamp Full-Stack JavaScript (React + Node)",
+      "organization": "Fundación Bolivia Digital",
+      "publisherType": "organizacion",
+      "rubro": "Tecnología",
+      "city": "Todo el país",
+      "modality": "Virtual",
+      "description": "Aprende a construir aplicaciones web completas desde cero: HTML/CSS, JavaScript moderno, React, Node.js, Express, bases de datos y despliegue. Proyecto final presentado a empresas aliadas.",
+      "deadlineInDays": 9,
+      "requirements": [
+        "Computadora con 8 GB RAM",
+        "Conocimientos básicos de computación",
+        "Entrevista de motivación"
+      ],
+      "benefits": [
+        "Certificado",
+        "Mentores de la industria",
+        "Bolsa de trabajo",
+        "Comunidad de egresados"
+      ],
+      "tags": [
+        "JavaScript",
+        "React",
+        "Node.js"
+      ],
+      "compensation": "Gratuito (con beca) · Bs 1.500 sin beca",
+      "duration": "12 semanas · 15 h/semana",
+      "startInDays": 14,
+      "spots": 40,
+      "isFeatured": true,
+      "publishedInDays": -2
+    },
+    {
+      "id": "c2",
+      "type": "curso",
+      "title": "Diplomado en Gestión de Proyectos (PMI)",
+      "organization": "Universidad Autónoma Gabriel René Moreno – Posgrado",
+      "publisherType": "universidad",
+      "rubro": "Administración",
+      "city": "Santa Cruz de la Sierra",
+      "modality": "Híbrido",
+      "description": "Diplomado alineado al PMBOK 7 con casos reales de empresas bolivianas. Prepara para la certificación CAPM/PMP e incluye simulador de examen.",
+      "deadlineInDays": 15,
+      "requirements": [
+        "Título de licenciatura o egreso",
+        "Experiencia laboral deseable"
+      ],
+      "benefits": [
+        "Diploma universitario",
+        "Simulador PMP",
+        "Networking"
+      ],
+      "tags": [
+        "PMP",
+        "Proyectos",
+        "Diplomado"
+      ],
+      "compensation": "Bs 3.900 (3 cuotas)",
+      "duration": "5 meses · Sábados",
+      "startInDays": 20,
+      "spots": 35,
+      "isFeatured": false,
+      "publishedInDays": -5
+    },
+    {
+      "id": "c3",
+      "type": "curso",
+      "title": "Curso de Excel Avanzado y Power BI para Finanzas",
+      "organization": "Carlos Mamani – Contador y consultor",
+      "publisherType": "profesional",
+      "rubro": "Finanzas",
+      "city": "Todo el país",
+      "modality": "Virtual",
+      "description": "Tablas dinámicas, Power Query, modelado de datos y dashboards financieros en Power BI. Con plantillas listas para flujo de caja, presupuesto y control de gastos.",
+      "deadlineInDays": 6,
+      "requirements": [
+        "Excel básico",
+        "PC con Windows"
+      ],
+      "benefits": [
+        "Grabaciones disponibles 6 meses",
+        "Plantillas",
+        "Certificado de participación"
+      ],
+      "tags": [
+        "Excel",
+        "Power BI",
+        "Finanzas"
+      ],
+      "compensation": "Bs 350",
+      "duration": "4 semanas · Martes y jueves 19:00–21:00",
+      "startInDays": 8,
+      "spots": 25,
+      "publishedBy": "Carlos Mamani Rojas",
+      "isFeatured": false,
+      "publishedInDays": -1
+    },
+    {
+      "id": "c4",
+      "type": "curso",
+      "title": "Primeros Auxilios y RCP certificado",
+      "organization": "Cruz Roja Boliviana",
+      "publisherType": "organizacion",
+      "rubro": "Salud",
+      "city": "La Paz",
+      "modality": "Presencial",
+      "description": "Curso práctico con maniquíes y desfibrilador de entrenamiento. Certificación internacional válida por 2 años, requerida en muchas empresas y para brigadistas.",
+      "deadlineInDays": 8,
+      "requirements": [
+        "Mayor de 16 años"
+      ],
+      "benefits": [
+        "Certificado internacional",
+        "Manual impreso",
+        "Kit básico de primeros auxilios"
+      ],
+      "tags": [
+        "RCP",
+        "Primeros auxilios",
+        "Certificación"
+      ],
+      "compensation": "Bs 180",
+      "duration": "2 días (16 horas)",
+      "startInDays": 11,
+      "spots": 20,
+      "isFeatured": false,
+      "publishedInDays": -3
+    },
+    {
+      "id": "c5",
+      "type": "curso",
+      "title": "Taller de Marca Personal y LinkedIn para profesionales",
+      "organization": "Andrea Flores – Comunicadora",
+      "publisherType": "profesional",
+      "rubro": "Marketing",
+      "city": "Cochabamba",
+      "modality": "Híbrido",
+      "description": "Optimiza tu perfil, aprende a redactar tu \"acerca de\", conseguir recomendaciones y publicar contenido que atraiga reclutadores. Revisión en vivo de perfiles de participantes.",
+      "deadlineInDays": 5,
+      "requirements": [
+        "Tener cuenta de LinkedIn"
+      ],
+      "benefits": [
+        "Plantillas de perfil",
+        "Revisión personalizada",
+        "Grabación"
+      ],
+      "tags": [
+        "LinkedIn",
+        "Marca personal",
+        "Empleabilidad"
+      ],
+      "compensation": "Gratuito",
+      "duration": "1 tarde (3 horas)",
+      "startInDays": 6,
+      "spots": 50,
+      "publishedBy": "Andrea Flores Vargas",
+      "isFeatured": false,
+      "publishedInDays": -2
+    },
+    {
+      "id": "c6",
+      "type": "curso",
+      "title": "Curso de Soldadura MIG/TIG Industrial",
+      "organization": "INFOCAL Santa Cruz",
+      "publisherType": "organizacion",
+      "rubro": "Industria",
+      "city": "Santa Cruz de la Sierra",
+      "modality": "Presencial",
+      "description": "Formación técnica con práctica en taller: soldadura MIG/MAG y TIG en acero al carbono, inoxidable y aluminio. Incluye seguridad industrial e interpretación de planos.",
+      "deadlineInDays": 12,
+      "requirements": [
+        "Mayor de 18 años",
+        "Ropa de trabajo"
+      ],
+      "benefits": [
+        "Certificado técnico INFOCAL",
+        "Bolsa de empleo con industrias",
+        "Insumos incluidos"
+      ],
+      "tags": [
+        "Soldadura",
+        "Técnico",
+        "Industria"
+      ],
+      "compensation": "Bs 900",
+      "duration": "8 semanas · Lunes a viernes 18:30–21:30",
+      "startInDays": 17,
+      "spots": 15,
+      "isFeatured": false,
+      "publishedInDays": -6
+    },
+    {
+      "id": "e1",
+      "type": "evento",
+      "title": "Feria de Empleo Tucan 2026",
+      "organization": "Tucan · Cámara de Industria y Comercio (CAINCO)",
+      "publisherType": "organizacion",
+      "rubro": "Multisectorial",
+      "city": "Santa Cruz de la Sierra",
+      "modality": "Presencial",
+      "description": "Más de 60 empresas con vacantes reales, zona de entrevistas express, revisión gratuita de CV y charlas sobre tendencias del mercado laboral. Trae 10 copias de tu CV.",
+      "deadlineInDays": 11,
+      "requirements": [
+        "Registro previo (gratuito)"
+      ],
+      "benefits": [
+        "Entrevistas en el momento",
+        "Revisión de CV",
+        "Charlas y networking"
+      ],
+      "tags": [
+        "Feria",
+        "Networking",
+        "Empleo"
+      ],
+      "compensation": "Entrada libre",
+      "duration": "2 días · 09:00–18:00",
+      "startInDays": 12,
+      "spots": 3000,
+      "isFeatured": true,
+      "publishedInDays": -4
+    },
+    {
+      "id": "e2",
+      "type": "evento",
+      "title": "Meetup: Inteligencia Artificial aplicada a negocios bolivianos",
+      "organization": "Comunidad IA Bolivia",
+      "publisherType": "organizacion",
+      "rubro": "Tecnología",
+      "city": "La Paz",
+      "modality": "Híbrido",
+      "description": "Tres charlas relámpago de startups locales que usan IA en agro, banca y logística, seguidas de espacio de networking con pizza. Transmisión en vivo para el interior.",
+      "deadlineInDays": 4,
+      "requirements": [
+        "Registro en línea"
+      ],
+      "benefits": [
+        "Networking",
+        "Grabación",
+        "Sorteo de cursos"
+      ],
+      "tags": [
+        "IA",
+        "Meetup",
+        "Startups"
+      ],
+      "compensation": "Gratuito",
+      "duration": "1 noche · 19:00–21:30",
+      "startInDays": 5,
+      "spots": 120,
+      "isFeatured": false,
+      "publishedInDays": -2
+    },
+    {
+      "id": "e3",
+      "type": "evento",
+      "title": "Congreso Nacional de Enfermería y Cuidados Críticos",
+      "organization": "Colegio de Enfermeras de Bolivia",
+      "publisherType": "organizacion",
+      "rubro": "Salud",
+      "city": "Cochabamba",
+      "modality": "Presencial",
+      "description": "Ponencias internacionales, talleres prácticos de ventilación mecánica y manejo de vía aérea, y presentación de trabajos de investigación. Otorga créditos de educación continua.",
+      "deadlineInDays": 30,
+      "requirements": [
+        "Inscripción previa"
+      ],
+      "benefits": [
+        "Certificado con valor curricular",
+        "Talleres prácticos",
+        "Material"
+      ],
+      "tags": [
+        "Congreso",
+        "Enfermería"
+      ],
+      "compensation": "Bs 250 profesionales · Bs 120 estudiantes",
+      "duration": "3 días",
+      "startInDays": 40,
+      "spots": 500,
+      "isFeatured": false,
+      "publishedInDays": -8
+    },
+    {
+      "id": "e4",
+      "type": "evento",
+      "title": "Demo Day – Emprendimientos universitarios",
+      "organization": "Universidad Mayor de San Andrés · Incubadora UMSA",
+      "publisherType": "universidad",
+      "rubro": "Emprendimiento",
+      "city": "La Paz",
+      "modality": "Presencial",
+      "description": "15 startups universitarias presentan sus proyectos ante inversionistas y empresas. Oportunidad para conocer equipos que están reclutando cofundadores y primeros empleados.",
+      "deadlineInDays": 8,
+      "requirements": [
+        "Registro en línea"
+      ],
+      "benefits": [
+        "Networking con fundadores",
+        "Contacto con inversionistas"
+      ],
+      "tags": [
+        "Startups",
+        "Pitch",
+        "Universidad"
+      ],
+      "compensation": "Entrada libre",
+      "duration": "1 tarde",
+      "startInDays": 9,
+      "spots": 200,
+      "isFeatured": false,
+      "publishedInDays": -3
+    },
+    {
+      "id": "e5",
+      "type": "evento",
+      "title": "Webinar: Cómo negociar tu salario en tu primer empleo",
+      "organization": "María Fernanda Quispe – Ing. de Sistemas",
+      "publisherType": "profesional",
+      "rubro": "Empleabilidad",
+      "city": "Todo el país",
+      "modality": "Virtual",
+      "description": "Comparto mi experiencia y datos de rangos salariales por rubro en Bolivia. Cómo prepararte, qué decir y qué no decir, y cómo evaluar beneficios más allá del sueldo.",
+      "deadlineInDays": 3,
+      "requirements": [
+        "Registro en línea"
+      ],
+      "benefits": [
+        "Guía descargable de rangos salariales",
+        "Grabación"
+      ],
+      "tags": [
+        "Salario",
+        "Webinar",
+        "Carrera"
+      ],
+      "compensation": "Gratuito",
+      "duration": "1 hora + preguntas",
+      "startInDays": 3,
+      "spots": 300,
+      "publishedBy": "María Fernanda Quispe",
+      "isFeatured": false,
+      "publishedInDays": -1
+    },
+    {
+      "id": "e6",
+      "type": "evento",
+      "title": "Expo Construcción & Vivienda 2026",
+      "organization": "Cámara Boliviana de la Construcción (CABOCO)",
+      "publisherType": "organizacion",
+      "rubro": "Construcción",
+      "city": "Santa Cruz de la Sierra",
+      "modality": "Presencial",
+      "description": "Feria del sector construcción con más de 150 expositores, rueda de negocios y stand de reclutamiento para ingenieros, arquitectos y técnicos.",
+      "deadlineInDays": 50,
+      "requirements": [
+        "Registro en línea"
+      ],
+      "benefits": [
+        "Bolsa de trabajo del sector",
+        "Charlas técnicas"
+      ],
+      "tags": [
+        "Construcción",
+        "Feria"
+      ],
+      "compensation": "Bs 30 (gratis para estudiantes con carnet)",
+      "duration": "4 días",
+      "startInDays": 55,
+      "spots": 5000,
+      "isFeatured": false,
+      "publishedInDays": -12
+    },
+    {
+      "id": "k1",
+      "type": "competencia",
+      "title": "Hackathon Fintech Bolivia 2026",
+      "organization": "Banco BISA · Asoban",
+      "publisherType": "empresa",
+      "rubro": "Tecnología",
+      "city": "La Paz",
+      "modality": "Presencial",
+      "description": "Equipos de 3 a 5 personas desarrollan soluciones de inclusión financiera, pagos QR y prevención de fraude usando APIs reales del banco. Mentores de producto, ingeniería y regulación durante todo el evento.",
+      "deadlineInDays": 19,
+      "requirements": [
+        "Equipo de 3–5 integrantes",
+        "Al menos un perfil técnico y uno de negocio",
+        "Laptop propia"
+      ],
+      "benefits": [
+        "Premios en efectivo",
+        "Incubación de 3 meses",
+        "Entrevistas laborales para finalistas"
+      ],
+      "tags": [
+        "Hackathon",
+        "Fintech",
+        "APIs"
+      ],
+      "compensation": "Premios: Bs 30.000 · Bs 15.000 · Bs 7.000 + incubación",
+      "duration": "48 horas",
+      "startInDays": 26,
+      "spots": 30,
+      "isFeatured": true,
+      "publishedInDays": -3
+    },
+    {
+      "id": "k2",
+      "type": "competencia",
+      "title": "Concurso Nacional de Planes de Negocio \"Emprende Bolivia\"",
+      "organization": "Ministerio de Desarrollo Productivo · BDP",
+      "publisherType": "organizacion",
+      "rubro": "Emprendimiento",
+      "city": "Todo el país",
+      "modality": "Híbrido",
+      "description": "Convocatoria para emprendimientos en etapa temprana con impacto productivo o social. Los 20 finalistas reciben capacitación intensiva y presentan ante jurado nacional.",
+      "deadlineInDays": 45,
+      "requirements": [
+        "Emprendedores mayores de 18 años",
+        "Plan de negocio en formato oficial",
+        "Video de 2 minutos"
+      ],
+      "benefits": [
+        "Capital semilla",
+        "Capacitación",
+        "Visibilidad nacional"
+      ],
+      "tags": [
+        "Capital semilla",
+        "Emprendimiento"
+      ],
+      "compensation": "Capital semilla hasta Bs 70.000 por proyecto",
+      "duration": "Convocatoria 45 días + final presencial",
+      "spots": 20,
+      "isFeatured": false,
+      "publishedInDays": -7
+    },
+    {
+      "id": "k3",
+      "type": "competencia",
+      "title": "Olimpiada Universitaria de Programación (ICPC regional)",
+      "organization": "Universidad Mayor de San Simón · Sociedad Científica",
+      "publisherType": "universidad",
+      "rubro": "Tecnología",
+      "city": "Cochabamba",
+      "modality": "Presencial",
+      "description": "Equipos de 3 estudiantes resuelven problemas algorítmicos en C++, Java o Python. Los mejores clasifican a la final regional de ICPC Latinoamérica.",
+      "deadlineInDays": 25,
+      "requirements": [
+        "Estudiantes universitarios activos",
+        "Equipo de 3 personas",
+        "Un entrenador (docente)"
+      ],
+      "benefits": [
+        "Clasificación internacional",
+        "Premios",
+        "Reconocimiento académico"
+      ],
+      "tags": [
+        "ICPC",
+        "Algoritmos",
+        "Programación competitiva"
+      ],
+      "compensation": "Clasificación a la final latinoamericana + premios",
+      "duration": "1 día (5 horas de competencia)",
+      "startInDays": 32,
+      "spots": 60,
+      "isFeatured": false,
+      "publishedInDays": -5
+    },
+    {
+      "id": "k4",
+      "type": "competencia",
+      "title": "Concurso de Diseño de Identidad – Marca Ciudad Sucre",
+      "organization": "Gobierno Autónomo Municipal de Sucre",
+      "publisherType": "organizacion",
+      "rubro": "Diseño",
+      "city": "Sucre",
+      "modality": "Virtual",
+      "description": "Diseño del sistema de identidad visual para la promoción turística de Sucre: logotipo, paleta, tipografía y aplicaciones. Abierto a diseñadores y estudios de todo el país.",
+      "deadlineInDays": 30,
+      "requirements": [
+        "Portafolio",
+        "Propuesta en formato PDF (máx. 20 páginas)",
+        "Declaración de originalidad"
+      ],
+      "benefits": [
+        "Premio en efectivo",
+        "Contrato de implementación",
+        "Reconocimiento público"
+      ],
+      "tags": [
+        "Diseño gráfico",
+        "Branding",
+        "Concurso"
+      ],
+      "compensation": "Premio único Bs 25.000 + contrato de implementación",
+      "duration": "Convocatoria de 30 días",
+      "isFeatured": false,
+      "publishedInDays": -4
+    },
+    {
+      "id": "k5",
+      "type": "competencia",
+      "title": "Desafío de Casos de Negocio – Consultoría",
+      "organization": "Deloitte Bolivia · Universidad Privada de Santa Cruz (UPSA)",
+      "publisherType": "empresa",
+      "rubro": "Administración",
+      "city": "Santa Cruz de la Sierra",
+      "modality": "Presencial",
+      "description": "Equipos de 4 estudiantes analizan un caso real de una empresa boliviana y presentan recomendaciones estratégicas ante socios de la firma.",
+      "deadlineInDays": 10,
+      "requirements": [
+        "Estudiantes de Administración, Economía, Ing. Comercial o afines",
+        "Equipo de 4"
+      ],
+      "benefits": [
+        "Pasantía garantizada (ganadores)",
+        "Mentoría",
+        "Networking"
+      ],
+      "tags": [
+        "Consultoría",
+        "Casos",
+        "Estrategia"
+      ],
+      "compensation": "Pasantía asegurada para el equipo ganador + Bs 5.000",
+      "duration": "2 semanas + final presencial",
+      "startInDays": 15,
+      "spots": 24,
+      "isFeatured": false,
+      "publishedInDays": -2
+    },
+    {
+      "id": "k6",
+      "type": "competencia",
+      "title": "Concurso de Fotografía \"Bolivia Trabaja\"",
+      "organization": "Patricia Suárez · Colectivo Visual SCZ",
+      "publisherType": "profesional",
+      "rubro": "Arte y cultura",
+      "city": "Todo el país",
+      "modality": "Virtual",
+      "description": "Fotografías que retraten oficios y profesiones bolivianas. Las 30 mejores se exponen en la Manzana Uno y en la Feria de Empleo Tucan.",
+      "deadlineInDays": 40,
+      "requirements": [
+        "Hasta 3 fotografías por participante",
+        "Resolución mínima 3000 px",
+        "Formulario en línea"
+      ],
+      "benefits": [
+        "Premios",
+        "Exposición pública",
+        "Difusión en medios"
+      ],
+      "tags": [
+        "Fotografía",
+        "Arte",
+        "Concurso"
+      ],
+      "compensation": "Premios: cámara mirrorless + Bs 3.000 + exposición",
+      "duration": "Convocatoria de 40 días",
+      "publishedBy": "Patricia Suárez",
+      "isFeatured": false,
+      "publishedInDays": -6
+    }
+  ],
+  "applications": [
+    {
+      "opportunityId": "t1",
+      "status": "entrevista",
+      "appliedInDays": -6,
+      "note": "Entrevista técnica agendada para el jueves 10:00"
+    },
+    {
+      "opportunityId": "t4",
+      "status": "enRevision",
+      "appliedInDays": -3
+    },
+    {
+      "opportunityId": "p1",
+      "status": "aceptada",
+      "appliedInDays": -15,
+      "note": "Inicio confirmado. Te enviaron el plan de onboarding."
+    },
+    {
+      "opportunityId": "b4",
+      "status": "enviada",
+      "appliedInDays": -1
+    },
+    {
+      "opportunityId": "t2",
+      "status": "rechazada",
+      "appliedInDays": -20,
+      "note": "Buscaban perfil con más experiencia en banca."
+    }
+  ],
+  "completedWorks": [
+    {
+      "title": "Desarrollo de app de delivery para restaurante",
+      "organization": "La Casona Restaurante",
+      "period": "Mar 2026 – May 2026",
+      "description": "App Flutter para pedidos con seguimiento en tiempo real y pagos QR. Publicada en Android e iOS.",
+      "rating": 5.0,
+      "review": "Excelente trabajo, cumplió los plazos y la app funciona perfecto. ¡La recomiendo!",
+      "rubro": "Tecnología",
+      "skills": [
+        "Flutter",
+        "Firebase",
+        "Pagos QR"
+      ]
+    },
+    {
+      "title": "Landing page y tienda online",
+      "organization": "Dulces de Ana",
+      "period": "Ene 2026 – Feb 2026",
+      "description": "Sitio web responsive con catálogo, carrito y pedidos por WhatsApp.",
+      "rating": 4.8,
+      "review": "Muy profesional y paciente con nuestros cambios. Las ventas subieron un 30%.",
+      "rubro": "Tecnología",
+      "skills": [
+        "React",
+        "Diseño web",
+        "SEO"
+      ]
+    },
+    {
+      "title": "Automatización de reportes en Excel",
+      "organization": "Ferretería El Tornillo",
+      "period": "Nov 2025",
+      "description": "Macros y Power Query para consolidar ventas de 4 sucursales en un dashboard semanal.",
+      "rating": 4.6,
+      "review": "Nos ahorró horas cada semana. Buen soporte posterior.",
+      "rubro": "Finanzas",
+      "skills": [
+        "Excel",
+        "Power Query",
+        "VBA"
+      ]
+    },
+    {
+      "title": "Capacitación en herramientas digitales",
+      "organization": "Cooperativa San Martín",
+      "period": "Sep 2025",
+      "description": "Taller de 12 horas para 25 personas sobre Google Workspace y seguridad digital.",
+      "rating": 4.9,
+      "review": "Explica muy claro, el equipo quedó encantado.",
+      "rubro": "Educación",
+      "skills": [
+        "Capacitación",
+        "Google Workspace"
+      ]
+    }
+  ],
+  "employerOpportunities": [
+    {
+      "id": "and3",
+      "type": "pasantia",
+      "title": "Pasantía en Control de Calidad de Software",
+      "organization": "AndinaTech S.R.L.",
+      "publisherType": "empresa",
+      "rubro": "Tecnología",
+      "city": "La Paz",
+      "modality": "Híbrido",
+      "description": "Pasantía de seis meses acompañando al equipo de QA: casos de prueba, automatización básica y reporte de errores. Con posibilidad de contratación.",
+      "deadlineInDays": 30,
+      "requirements": [
+        "Estudiante de últimos semestres",
+        "Ganas de aprender"
+      ],
+      "benefits": [
+        "Estipendio",
+        "Mentoría",
+        "Posibilidad de contratación"
+      ],
+      "tags": [
+        "QA",
+        "Pruebas",
+        "Automatización"
+      ],
+      "compensation": "Estipendio Bs 2.500 / mes",
+      "duration": "6 meses",
+      "spots": 2,
+      "contact": "talento@andinatech.bo",
+      "publishedBy": "Valeria Rocha",
+      "isFeatured": false,
+      "publishedInDays": -2
+    },
+    {
+      "id": "and2",
+      "type": "trabajo",
+      "title": "Diseñador/a de Producto (UX/UI)",
+      "organization": "AndinaTech S.R.L.",
+      "publisherType": "empresa",
+      "rubro": "Tecnología",
+      "city": "La Paz",
+      "modality": "Presencial",
+      "description": "Diseño de producto de punta a punta: investigación, flujos, prototipos y entrega a desarrollo. Trabajarás junto a producto y backend.",
+      "deadlineInDays": 12,
+      "requirements": [
+        "Portafolio con casos reales",
+        "Figma",
+        "Sistemas de diseño"
+      ],
+      "benefits": [
+        "Seguro de salud",
+        "Equipo a elección"
+      ],
+      "tags": [
+        "Figma",
+        "UX",
+        "Sistemas de diseño"
+      ],
+      "compensation": "Bs 8.000 — 11.000 / mes",
+      "spots": 1,
+      "contact": "talento@andinatech.bo",
+      "publishedBy": "Valeria Rocha",
+      "isFeatured": false,
+      "publishedInDays": -4
+    },
+    {
+      "id": "and1",
+      "type": "trabajo",
+      "title": "Desarrollador/a Backend Node.js",
+      "organization": "AndinaTech S.R.L.",
+      "publisherType": "empresa",
+      "rubro": "Tecnología",
+      "city": "La Paz",
+      "modality": "Híbrido",
+      "description": "Buscamos backend para nuestro equipo de plataforma. APIs REST, PostgreSQL y despliegues en la nube. Equipo de 6 personas, ciclos de dos semanas.",
+      "deadlineInDays": 21,
+      "requirements": [
+        "3+ años con Node.js",
+        "PostgreSQL y modelado de datos",
+        "Docker y CI/CD"
+      ],
+      "benefits": [
+        "Seguro de salud",
+        "Dos días de trabajo remoto",
+        "Presupuesto de formación"
+      ],
+      "tags": [
+        "Node.js",
+        "PostgreSQL",
+        "Docker",
+        "APIs"
+      ],
+      "compensation": "Bs 10.000 — 14.000 / mes",
+      "spots": 2,
+      "contact": "talento@andinatech.bo",
+      "publishedBy": "Valeria Rocha",
+      "isFeatured": true,
+      "publishedInDays": -9
+    }
+  ],
+  "applicants": [
+    {
+      "id": "a1",
+      "opportunityId": "and1",
+      "name": "Diego Arancibia",
+      "headline": "Backend Node.js · 5 años",
+      "city": "La Paz",
+      "phone": "59171234001",
+      "email": "diego.arancibia@correo.com",
+      "appliedInDays": -1,
+      "status": "enRevision",
+      "message": "Trabajé tres años en fintech con cargas altas. Me interesa el equipo de plataforma.",
+      "sentCv": true,
+      "cv": {
+        "fullName": "Diego Arancibia",
+        "headline": "Backend Node.js · 5 años",
+        "summary": "Backend con cinco años construyendo APIs para fintech y retail. Me manejo con PostgreSQL, colas y despliegues en contenedores.",
+        "email": "diego.arancibia@correo.com",
+        "phone": "59171234001",
+        "city": "La Paz",
+        "website": "",
+        "experiences": [
+          {
+            "role": "API de pagos QR",
+            "organization": "Fintech Andina",
+            "period": "Ene 2024 — Dic 2025",
+            "description": "Servicio de pagos con 200 mil transacciones al mes.",
+            "skills": [
+              "Node.js",
+              "PostgreSQL"
+            ],
+            "rating": 4.9,
+            "review": "Entregó a tiempo y dejó todo documentado."
+          }
+        ],
+        "education": [
+          {
+            "title": "Ingeniería de Sistemas",
+            "institution": "UMSA",
+            "period": "",
+            "detail": ""
+          }
+        ],
+        "skills": [
+          "Node.js",
+          "PostgreSQL",
+          "Docker",
+          "Redis",
+          "APIs"
+        ],
+        "languages": [
+          "Español",
+          "Inglés B2"
+        ],
+        "certificates": [],
+        "accent": "teal"
+      },
+      "notes": []
+    },
+    {
+      "id": "a2",
+      "opportunityId": "and1",
+      "name": "Karen Choque",
+      "headline": "Desarrolladora full-stack",
+      "city": "El Alto",
+      "phone": "59171234002",
+      "email": "karen.choque@correo.com",
+      "appliedInDays": -3,
+      "status": "entrevista",
+      "sentCv": true,
+      "cv": {
+        "fullName": "Karen Choque",
+        "headline": "Desarrolladora full-stack",
+        "summary": "Full-stack con cuatro años en proyectos web. Vengo del frontend y me he ido moviendo al backend.",
+        "email": "karen.choque@correo.com",
+        "phone": "59171234002",
+        "city": "El Alto",
+        "website": "",
+        "experiences": [
+          {
+            "role": "Portal de trámites municipales",
+            "organization": "GAMEA",
+            "period": "2023 — 2025",
+            "description": "Frontend y parte del backend del portal ciudadano.",
+            "skills": [
+              "React",
+              "Node.js"
+            ],
+            "rating": 4.6,
+            "review": "Muy buena disposición y cumplió los plazos."
+          }
+        ],
+        "education": [
+          {
+            "title": "Ingeniería Informática",
+            "institution": "UPEA",
+            "period": "",
+            "detail": ""
+          }
+        ],
+        "skills": [
+          "Node.js",
+          "React",
+          "APIs",
+          "MySQL"
+        ],
+        "languages": [
+          "Español"
+        ],
+        "certificates": [],
+        "accent": "teal"
+      },
+      "notes": [
+        {
+          "author": "Valeria Rocha",
+          "text": "Entrevista técnica el jueves. Preguntar por experiencia con colas.",
+          "atInDays": -1
+        }
+      ]
+    },
+    {
+      "id": "a3",
+      "opportunityId": "and2",
+      "name": "Sofía Mendoza",
+      "headline": "Diseñadora de producto",
+      "city": "La Paz",
+      "phone": "59171234003",
+      "email": "sofia.mendoza@correo.com",
+      "appliedInDays": -2,
+      "status": "enviada",
+      "message": "Les dejo mi portafolio en el CV. Me gustó mucho su app.",
+      "sentCv": true,
+      "cv": {
+        "fullName": "Sofía Mendoza",
+        "headline": "Diseñadora de producto",
+        "summary": "Diseño de producto con foco en investigación. Trabajé en banca digital y en comercio electrónico.",
+        "email": "sofia.mendoza@correo.com",
+        "phone": "59171234003",
+        "city": "La Paz",
+        "website": "behance.net/sofiamendoza",
+        "experiences": [
+          {
+            "role": "Rediseño de banca móvil",
+            "organization": "Banco Sol",
+            "period": "2024 — 2025",
+            "description": "Investigación, flujos y sistema de diseño de la app.",
+            "skills": [
+              "Figma",
+              "UX"
+            ],
+            "rating": 5.0,
+            "review": "Elevó el nivel del producto. La volveríamos a contratar."
+          }
+        ],
+        "education": [
+          {
+            "title": "Diseño Gráfico",
+            "institution": "UCB",
+            "period": "",
+            "detail": ""
+          }
+        ],
+        "skills": [
+          "Figma",
+          "UX",
+          "Investigación",
+          "Sistemas de diseño"
+        ],
+        "languages": [
+          "Español",
+          "Inglés C1"
+        ],
+        "certificates": [],
+        "accent": "teal"
+      },
+      "notes": []
+    },
+    {
+      "id": "a4",
+      "opportunityId": "and3",
+      "name": "Luis Fernando Tarqui",
+      "headline": "Estudiante de Ingeniería de Sistemas",
+      "city": "La Paz",
+      "phone": "59171234004",
+      "email": "lf.tarqui@correo.com",
+      "appliedInDays": -1,
+      "status": "enviada",
+      "sentCv": false,
+      "cv": {
+        "fullName": "Luis Fernando Tarqui",
+        "headline": "Estudiante de Ingeniería de Sistemas",
+        "summary": "",
+        "email": "lf.tarqui@correo.com",
+        "phone": "59171234004",
+        "city": "La Paz",
+        "website": "",
+        "experiences": [],
+        "education": [
+          {
+            "title": "Ingeniería de Sistemas (8.º semestre)",
+            "institution": "UMSA",
+            "period": "",
+            "detail": ""
+          }
+        ],
+        "skills": [
+          "Pruebas",
+          "Python"
+        ],
+        "languages": [],
+        "certificates": [],
+        "accent": "teal"
+      },
+      "notes": []
+    },
+    {
+      "id": "a5",
+      "opportunityId": "and3",
+      "name": "Gabriela Nina",
+      "headline": "Técnica en Sistemas Informáticos",
+      "city": "La Paz",
+      "phone": "59171234005",
+      "email": "gabriela.nina@correo.com",
+      "appliedInDays": -4,
+      "status": "rechazada",
+      "sentCv": true,
+      "cv": {
+        "fullName": "Gabriela Nina",
+        "headline": "Técnica en Sistemas Informáticos",
+        "summary": "Técnica superior con prácticas en soporte y pruebas manuales.",
+        "email": "gabriela.nina@correo.com",
+        "phone": "59171234005",
+        "city": "La Paz",
+        "website": "",
+        "experiences": [],
+        "education": [
+          {
+            "title": "Técnico Superior en Sistemas",
+            "institution": "Instituto Incos",
+            "period": "",
+            "detail": ""
+          }
+        ],
+        "skills": [
+          "Pruebas",
+          "Soporte",
+          "QA"
+        ],
+        "languages": [
+          "Español"
+        ],
+        "certificates": [],
+        "accent": "teal"
+      },
+      "notes": [
+        {
+          "author": "Valeria Rocha",
+          "text": "Buen perfil pero busca tiempo completo y la pasantía es de medio tiempo.",
+          "atInDays": -3
+        }
+      ]
+    }
+  ],
+  "stores": [
+    {
+      "id": "e1",
+      "name": "Tortas y Empanadas Marta",
+      "description": "Tortas caseras personalizadas para cumpleaños y eventos, empanadas de carne, pollo y queso, y postres por encargo. Ingredientes frescos y recetas de familia. Hacemos entregas a domicilio.",
+      "products": [
+        {
+          "name": "Torta de chocolate (12 porciones)",
+          "description": "Bizcocho húmedo con ganache y frutos rojos",
+          "price": "Bs 120"
+        },
+        {
+          "name": "Caja de 6 empanadas",
+          "description": "Variadas: carne, pollo, queso",
+          "price": "Bs 30"
+        },
+        {
+          "name": "Cheesecake de maracuyá",
+          "description": "Base de galleta, 10 porciones",
+          "price": "Bs 140"
+        },
+        {
+          "name": "Mesa dulce para eventos",
+          "description": "Desde 30 personas · incluye montaje",
+          "price": "Desde Bs 650"
+        }
+      ],
+      "phone": "59171234567",
+      "ownerId": "marta",
+      "category": "Repostería",
+      "city": "Santa Cruz de la Sierra",
+      "address": "Av. Banzer 3er anillo, Equipetrol",
+      "hours": "Lun–Sáb 08:00–19:00",
+      "rating": 4.9,
+      "reviewsCount": 128,
+      "tags": [
+        "Tortas",
+        "Empanadas",
+        "Eventos",
+        "Sin gluten"
+      ],
+      "delivery": true,
+      "ownerName": "Marta Rojas",
+      "instagram": "@tortasmarta",
+      "createdInDays": -20
+    },
+    {
+      "id": "e2",
+      "name": "Dulces de Ana",
+      "description": "Repostería artesanal: tartas de frutas, galletas decoradas para eventos corporativos y cajas de regalo. Promociones semanales y descuentos por volumen.",
+      "products": [
+        {
+          "name": "Tarta de frutas de temporada",
+          "description": "8 porciones",
+          "price": "Bs 150"
+        },
+        {
+          "name": "Galletas decoradas (docena)",
+          "description": "Personalizadas con logo o nombre",
+          "price": "Bs 40"
+        },
+        {
+          "name": "Caja de regalo \"Dulce detalle\"",
+          "description": "6 brownies + 6 alfajores",
+          "price": "Bs 85"
+        }
+      ],
+      "phone": "59179123456",
+      "ownerId": "ana",
+      "category": "Repostería",
+      "city": "Cochabamba",
+      "address": "Calle España 240, zona Cala Cala",
+      "hours": "Mar–Dom 10:00–20:00",
+      "rating": 4.7,
+      "reviewsCount": 64,
+      "tags": [
+        "Galletas",
+        "Tartas",
+        "Regalos",
+        "Corporativo"
+      ],
+      "delivery": true,
+      "ownerName": "Ana Villarroel",
+      "instagram": "@dulcesdeana.cbba",
+      "createdInDays": -15
+    },
+    {
+      "id": "e3",
+      "name": "Salteñas Don Juan",
+      "description": "Salteñas tradicionales paceñas de pollo, carne y mixtas, jugosas y recién horneadas. Combos para oficinas y catering para eventos de hasta 300 personas.",
+      "products": [
+        {
+          "name": "Salteña de pollo / carne",
+          "description": "Recién horneada",
+          "price": "Bs 7"
+        },
+        {
+          "name": "Combo oficina (12 salteñas + jugos)",
+          "description": "Entrega antes de las 10:00",
+          "price": "Bs 95"
+        },
+        {
+          "name": "Catering para eventos",
+          "description": "Por persona, mínimo 50",
+          "price": "Bs 18 c/u"
+        }
+      ],
+      "phone": "59171239876",
+      "ownerId": "juan",
+      "category": "Gastronomía",
+      "city": "La Paz",
+      "address": "Av. 6 de Agosto 2145, Sopocachi",
+      "hours": "Lun–Sáb 07:30–12:30",
+      "rating": 4.8,
+      "reviewsCount": 212,
+      "tags": [
+        "Salteñas",
+        "Desayunos",
+        "Eventos",
+        "Catering"
+      ],
+      "delivery": true,
+      "ownerName": "Juan Pérez",
+      "createdInDays": -30
+    },
+    {
+      "id": "e4",
+      "name": "Ñandutí Textiles",
+      "description": "Textiles hechos a mano por artesanas de Tarabuco: aguayos, chalinas de alpaca, bolsos y decoración. Cada pieza es única y apoya a 14 familias tejedoras. Envíos a todo el país.",
+      "products": [
+        {
+          "name": "Chalina de alpaca",
+          "description": "Teñido natural, 180 cm",
+          "price": "Bs 180"
+        },
+        {
+          "name": "Aguayo tradicional",
+          "description": "1.2 x 1.2 m",
+          "price": "Bs 260"
+        },
+        {
+          "name": "Bolso tejido con cuero",
+          "description": "Interior forrado",
+          "price": "Bs 220"
+        },
+        {
+          "name": "Cojines decorativos (par)",
+          "description": "45 x 45 cm",
+          "price": "Bs 150"
+        }
+      ],
+      "phone": "59172233441",
+      "ownerId": "rosario",
+      "category": "Artesanía",
+      "city": "Sucre",
+      "address": "Mercado Central, puesto 42",
+      "hours": "Lun–Dom 09:00–18:00",
+      "rating": 4.9,
+      "reviewsCount": 87,
+      "tags": [
+        "Tejidos",
+        "Aguayos",
+        "Regalos",
+        "Exportación"
+      ],
+      "delivery": true,
+      "ownerName": "Rosario Mamani",
+      "instagram": "@nanduti.textiles",
+      "createdInDays": -10
+    },
+    {
+      "id": "e5",
+      "name": "PixelBo Estudio",
+      "description": "Estudio digital para emprendedores: páginas web, tiendas online, apps y diseño de marca. Planes accesibles con pago en cuotas y soporte por WhatsApp.",
+      "products": [
+        {
+          "name": "Landing page profesional",
+          "description": "Entrega en 7 días · dominio + hosting 1 año",
+          "price": "Bs 1.200"
+        },
+        {
+          "name": "Tienda online",
+          "description": "Catálogo, carrito, pagos QR",
+          "price": "Bs 2.900"
+        },
+        {
+          "name": "Identidad de marca",
+          "description": "Logo, paleta, papelería y redes",
+          "price": "Bs 900"
+        }
+      ],
+      "phone": "59176655443",
+      "ownerId": "diego",
+      "category": "Tecnología",
+      "city": "Santa Cruz de la Sierra",
+      "hours": "Lun–Vie 09:00–18:00 (remoto)",
+      "rating": 5.0,
+      "reviewsCount": 41,
+      "tags": [
+        "Páginas web",
+        "Tiendas online",
+        "Apps",
+        "Branding"
+      ],
+      "delivery": false,
+      "ownerName": "Diego Aguilar",
+      "instagram": "@pixelbo.studio",
+      "createdInDays": -5
+    },
+    {
+      "id": "e6",
+      "name": "Raíces Spa & Belleza",
+      "description": "Spa con productos naturales bolivianos: masajes relajantes, faciales con arcilla y miel, manicure y venta de cosmética artesanal. Reservas por WhatsApp.",
+      "products": [
+        {
+          "name": "Masaje relajante 60 min",
+          "description": "Aceites esenciales",
+          "price": "Bs 150"
+        },
+        {
+          "name": "Facial hidratante",
+          "description": "Con arcilla y miel de Yungas",
+          "price": "Bs 120"
+        },
+        {
+          "name": "Kit cosmética natural",
+          "description": "Jabón, crema y bálsamo",
+          "price": "Bs 95"
+        }
+      ],
+      "phone": "59178899001",
+      "ownerId": "camila",
+      "category": "Belleza y bienestar",
+      "city": "Cochabamba",
+      "address": "Av. América Oeste 512",
+      "hours": "Lun–Sáb 09:00–20:00",
+      "rating": 4.8,
+      "reviewsCount": 156,
+      "tags": [
+        "Masajes",
+        "Manicure",
+        "Faciales",
+        "Productos naturales"
+      ],
+      "delivery": false,
+      "ownerName": "Camila Torrez",
+      "instagram": "@raices.spa",
+      "createdInDays": -2
+    }
+  ],
+  "posts": [
+    {
+      "id": "community_demo_professional",
+      "author": {
+        "id": "sample_professional",
+        "name": "Daniela Vargas",
+        "role": "Profesional / técnico",
+        "city": "Cochabamba",
+        "subtitle": "Administración de empresas"
+      },
+      "kind": "seeking",
+      "body": "Estoy buscando empleo en administración y atención al cliente. Tengo experiencia en gestión de pedidos y manejo de Excel. Me gustaría conectar con empresas de Cochabamba.",
+      "likedBy": [],
+      "comments": [],
+      "createdInHours": -2
+    },
+    {
+      "id": "community_demo_company",
+      "author": {
+        "id": "sample_company",
+        "name": "AndinaTech S.R.L.",
+        "role": "Empresa",
+        "city": "La Paz",
+        "subtitle": ""
+      },
+      "kind": "achievement",
+      "body": "¡Terminamos nuestro primer programa de formación para nuevos desarrolladores! Gracias a nuestro equipo por compartir su experiencia y acompañar a los nuevos talentos.",
+      "likedBy": [],
+      "comments": [],
+      "createdInHours": -5
+    },
+    {
+      "id": "community_demo_store",
+      "author": {
+        "id": "store:e1",
+        "name": "Tortas y Empanadas Marta",
+        "role": "Emprendimiento",
+        "city": "Santa Cruz de la Sierra",
+        "subtitle": "Repostería"
+      },
+      "kind": "offering",
+      "body": "Ya recibimos pedidos de tortas personalizadas y mesas dulces para eventos. Visita nuestro catálogo y apoya a los emprendimientos locales.",
+      "likedBy": [],
+      "comments": [],
+      "createdInHours": -8
+    },
+    {
+      "id": "community_demo_technician",
+      "author": {
+        "id": "sample_technician",
+        "name": "Luis Mamani",
+        "role": "Profesional / técnico",
+        "city": "Oruro",
+        "subtitle": "Técnico electricista"
+      },
+      "kind": "seeking",
+      "body": "Soy técnico electricista y estoy disponible para instalaciones, mantenimiento y proyectos. Busco oportunidades en Oruro y La Paz. ¡Conversemos!",
+      "likedBy": [],
+      "comments": [],
+      "createdInHours": -24
+    }
+  ],
+  "sampleProfiles": [
+    {
+      "id": "sample_seeker_1",
+      "role": "seeker",
+      "name": "María Fernanda Quispe",
+      "email": "maria.quispe@gmail.com",
+      "phoneIntl": "59171234567",
+      "city": "La Paz",
+      "department": "La Paz",
+      "province": "Murillo",
+      "career": "Ingeniería en Sistemas",
+      "specialty": "Desarrollo web (Flutter / React)",
+      "summary": "Desarrolladora con 3 años de experiencia en apps móviles y web. Busco oportunidades en equipos de producto.",
+      "languages": [
+        "Español",
+        "Inglés"
+      ],
+      "certificates": [
+        "Google Associate Android Developer"
+      ],
+      "skills": [
+        "Flutter",
+        "React",
+        "Node.js",
+        "SQL"
+      ],
+      "experiences": [
+        "Desarrolladora móvil en Tigo (2022-2024)",
+        "Freelance web (2021-2022)"
+      ],
+      "isProfilePublic": true,
+      "rating": 4.8,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "sample_seeker_2",
+      "role": "seeker",
+      "name": "Carlos Mamani Rojas",
+      "email": "carlos.mamani@gmail.com",
+      "phoneIntl": "59176543210",
+      "city": "Santa Cruz de la Sierra",
+      "department": "Santa Cruz",
+      "province": "Andrés Ibáñez",
+      "career": "Contaduría Pública",
+      "specialty": "Auditoría y tributación",
+      "summary": "Contador público con experiencia en auditoría externa y cierres contables para PyMEs.",
+      "languages": [
+        "Español"
+      ],
+      "skills": [
+        "Auditoría",
+        "NIIF",
+        "Excel avanzado",
+        "Tributación"
+      ],
+      "experiences": [
+        "Auditor junior en Deloitte Bolivia (2021-2023)"
+      ],
+      "isProfilePublic": true,
+      "rating": 4.5,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "sample_seeker_3",
+      "role": "seeker",
+      "name": "Andrea Flores Vargas",
+      "email": "andrea.flores@gmail.com",
+      "phoneIntl": "59169876543",
+      "city": "Cochabamba",
+      "department": "Cochabamba",
+      "province": "Cercado",
+      "career": "Ciencias de la Comunicación",
+      "specialty": "Marketing digital y contenidos",
+      "summary": "Comunicadora enfocada en redes sociales, campañas digitales y producción de contenido.",
+      "languages": [
+        "Español",
+        "Portugués"
+      ],
+      "skills": [
+        "Community management",
+        "Canva",
+        "Meta Ads",
+        "Redacción"
+      ],
+      "isProfilePublic": true,
+      "rating": 4.6,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "sample_provider_1",
+      "role": "serviceSeeker",
+      "name": "Jorge Choque",
+      "email": "jorge.choque@gmail.com",
+      "phoneIntl": "59170011223",
+      "city": "La Paz",
+      "department": "La Paz",
+      "province": "Murillo",
+      "summary": "Electricista con 10 años de experiencia en instalaciones domiciliarias e industriales.",
+      "skills": [
+        "Instalaciones eléctricas",
+        "Tableros",
+        "Mantenimiento"
+      ],
+      "serviceCategories": [
+        "Electricidad",
+        "Electricidad Industrial"
+      ],
+      "isProfilePublic": true,
+      "previousWorks": [
+        "Instalación eléctrica edificio Torre Azul",
+        "Mantenimiento planta embotelladora"
+      ],
+      "reviews": [
+        {
+          "author": "Lucía P.",
+          "comment": "Muy puntual y prolijo.",
+          "rating": "5"
+        },
+        {
+          "author": "Rodrigo M.",
+          "comment": "Buen trabajo, precio justo.",
+          "rating": "4"
+        }
+      ],
+      "rating": 4.7,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "sample_provider_2",
+      "role": "serviceSeeker",
+      "name": "Patricia Suárez",
+      "email": "patricia.suarez@gmail.com",
+      "phoneIntl": "59177788899",
+      "city": "Santa Cruz de la Sierra",
+      "department": "Santa Cruz",
+      "province": "Andrés Ibáñez",
+      "summary": "Diseñadora gráfica freelance: identidad de marca, redes sociales y material impreso.",
+      "skills": [
+        "Illustrator",
+        "Photoshop",
+        "Branding"
+      ],
+      "serviceCategories": [
+        "Diseño gráfico",
+        "Marketing digital"
+      ],
+      "isProfilePublic": true,
+      "previousWorks": [
+        "Rebranding Café del Sol",
+        "Catálogo digital Bolivian Foods"
+      ],
+      "rating": 4.9,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "sample_provider_3",
+      "role": "serviceSeeker",
+      "name": "Miguel Ángel Torrez",
+      "email": "miguel.torrez@gmail.com",
+      "phoneIntl": "59172233445",
+      "city": "Cochabamba",
+      "department": "Cochabamba",
+      "province": "Cercado",
+      "summary": "Plomero y gasfitero. Reparaciones, instalaciones sanitarias y emergencias 24/7.",
+      "skills": [
+        "Instalaciones sanitarias",
+        "Reparación de fugas",
+        "Termotanques"
+      ],
+      "serviceCategories": [
+        "Plomería"
+      ],
+      "isProfilePublic": true,
+      "rating": 4.4,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "sample_provider_4",
+      "role": "serviceSeeker",
+      "name": "Valeria Rocha",
+      "email": "valeria.rocha@gmail.com",
+      "phoneIntl": "59178899001",
+      "city": "La Paz",
+      "department": "La Paz",
+      "province": "Murillo",
+      "summary": "Desarrolladora web full-stack para emprendimientos: landing pages, tiendas online y sistemas a medida.",
+      "skills": [
+        "WordPress",
+        "React",
+        "Laravel",
+        "Hosting"
+      ],
+      "serviceCategories": [
+        "Desarrollo web",
+        "Soporte técnico"
+      ],
+      "isProfilePublic": true,
+      "rating": 4.8,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "sample_provider_5",
+      "role": "serviceSeeker",
+      "name": "Dr. Ricardo Aliaga",
+      "email": "ricardo.aliaga@gmail.com",
+      "phoneIntl": "59171122334",
+      "city": "Sucre",
+      "summary": "Abogado especializado en derecho laboral y civil. Asesoría a personas y empresas.",
+      "skills": [
+        "Derecho laboral",
+        "Contratos",
+        "Litigios"
+      ],
+      "serviceCategories": [
+        "Derecho"
+      ],
+      "isProfilePublic": true,
+      "rating": 4.6,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "sample_provider_6",
+      "role": "serviceSeeker",
+      "name": "Óscar Condori",
+      "email": "oscar.condori@gmail.com",
+      "phoneIntl": "59170123456",
+      "city": "El Alto",
+      "department": "La Paz",
+      "province": "Murillo",
+      "summary": "Soldador técnico para estructuras metálicas, puertas, rejas y reparaciones industriales.",
+      "skills": [
+        "Soldadura MIG",
+        "Estructuras metálicas",
+        "Corte y montaje"
+      ],
+      "serviceCategories": [
+        "Soldadura",
+        "Construcciones Civiles"
+      ],
+      "isProfilePublic": true,
+      "rating": 4.7,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "sample_provider_7",
+      "role": "serviceSeeker",
+      "name": "Daniela Vargas",
+      "email": "daniela.vargas@gmail.com",
+      "phoneIntl": "59170987654",
+      "city": "Santa Cruz de la Sierra",
+      "department": "Santa Cruz",
+      "province": "Andrés Ibáñez",
+      "summary": "Técnica en refrigeración y reparación de celulares con atención a domicilio.",
+      "skills": [
+        "Aires acondicionados",
+        "Diagnóstico de fallas",
+        "Cambio de pantallas"
+      ],
+      "serviceCategories": [
+        "Refrigeración",
+        "Reparación de celulares",
+        "Soporte técnico"
+      ],
+      "isProfilePublic": true,
+      "rating": 4.8,
+      "isEmployerVerified": false
+    }
+  ],
+  "demoProfiles": [
+    {
+      "id": "demo_professional",
+      "role": "seeker",
+      "name": "María Fernanda Quispe",
+      "email": "maria.quispe@gmail.com",
+      "phoneIntl": "59171234567",
+      "city": "Santa Cruz de la Sierra",
+      "career": "Ingeniería en Sistemas",
+      "specialty": "Desarrollo web y móvil (Flutter / React)",
+      "summary": "Profesional con 3 años de experiencia construyendo aplicaciones móviles y web. Me apasiona aprender y busco oportunidades para crecer en equipos de producto.",
+      "languages": [
+        "Español",
+        "Inglés"
+      ],
+      "certificates": [
+        "Google Associate Android Developer",
+        "Scrum Fundamentals"
+      ],
+      "skills": [
+        "Flutter",
+        "React",
+        "Node.js",
+        "SQL",
+        "Firebase"
+      ],
+      "experiences": [
+        "Desarrolladora móvil en Tigo (2022-2024)",
+        "Freelance web (2021-2022)"
+      ],
+      "isProfilePublic": true,
+      "rating": 4.9,
+      "isEmployerVerified": false
+    },
+    {
+      "id": "demo_employer",
+      "role": "employer",
+      "name": "Valeria Rocha",
+      "email": "talento@andinatech.bo",
+      "phoneIntl": "59170011223",
+      "city": "La Paz",
+      "summary": "Empresa de software con 45 colaboradores. Buscamos talento junior y senior para nuestros equipos de producto.",
+      "isProfilePublic": true,
+      "companyName": "AndinaTech S.R.L.",
+      "taxId": "1023456789",
+      "isEmployerVerified": true
+    },
+    {
+      "id": "demo_service_seeker",
+      "role": "serviceSeeker",
+      "name": "Roberto Salinas",
+      "email": "roberto.salinas@gmail.com",
+      "phoneIntl": "59176543219",
+      "city": "Santa Cruz de la Sierra",
+      "summary": "Busco profesionales y técnicos de confianza para mi casa y mi negocio.",
+      "isProfilePublic": true,
+      "isEmployerVerified": false
+    }
+  ],
+  "savedOpportunityIds": [
+    "b1",
+    "k1",
+    "c1"
+  ]
+}

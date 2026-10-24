@@ -1,0 +1,38 @@
+# Entorno local completo: SQL Server + API.
+#   docker compose up -d db          (solo la base de datos)
+#   docker compose up --build        (base de datos + API en http://localhost:3000)
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: ${DB_PASSWORD:?Define DB_PASSWORD en .env}
+    ports:
+      - '1433:1433'
+    volumes:
+      - mssql-data:/var/opt/mssql
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          '/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" || exit 1',
+        ]
+      interval: 10s
+      retries: 10
+
+  api:
+    build: .
+    env_file: .env
+    environment:
+      DB_SERVER: db
+      NODE_ENV: production
+    ports:
+      - '3000:3000'
+    depends_on:
+      db:
+        condition: service_healthy
+    # Migra, carga los datos demo y arranca.
+    command: sh -c "node scripts/migrate.js && node scripts/seed.js && node src/server.js"
+
+volumes:
+  mssql-data:
