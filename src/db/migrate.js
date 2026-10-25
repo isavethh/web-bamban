@@ -14,14 +14,22 @@ export function splitBatches(script) {
     .filter(Boolean);
 }
 
-/** Crea la base de datos si no existe (conectándose a `master`). */
-export async function ensureDatabase(name = env.DB_NAME) {
+/**
+ * Crea la base de datos si no existe (conectándose a `master`).
+ *
+ * En hostings compartidos (Somee, Azure SQL) el usuario no puede entrar a
+ * `master`, pero la base ya la crea el proveedor: entonces se sigue con ella.
+ */
+export async function ensureDatabase(name = env.DB_NAME, { log = console.log } = {}) {
   if (!/^[A-Za-z0-9_]+$/.test(name)) throw new Error(`Nombre de base de datos inválido: ${name}`);
-  const master = await new sql.ConnectionPool(connectionConfig('master')).connect();
+  let master;
   try {
+    master = await new sql.ConnectionPool(connectionConfig('master')).connect();
     await master.request().query(`IF DB_ID(N'${name}') IS NULL CREATE DATABASE [${name}]`);
+  } catch (err) {
+    log(`No se pudo crear la base desde master (${err.message}); se usa la existente: ${name}`);
   } finally {
-    await master.close();
+    await master?.close();
   }
 }
 
