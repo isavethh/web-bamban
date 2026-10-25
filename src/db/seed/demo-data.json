@@ -1657,7 +1657,9 @@
       "delivery": true,
       "ownerName": "Marta Rojas",
       "instagram": "@tortasmarta",
-      "createdInDays": -20
+      "createdInDays": -20,
+      "department": "Santa Cruz",
+      "province": "Andrés Ibáñez"
     },
     {
       "id": "e2",
@@ -1697,7 +1699,9 @@
       "delivery": true,
       "ownerName": "Ana Villarroel",
       "instagram": "@dulcesdeana.cbba",
-      "createdInDays": -15
+      "createdInDays": -15,
+      "department": "Cochabamba",
+      "province": "Cercado"
     },
     {
       "id": "e3",
@@ -1736,7 +1740,9 @@
       ],
       "delivery": true,
       "ownerName": "Juan Pérez",
-      "createdInDays": -30
+      "createdInDays": -30,
+      "department": "La Paz",
+      "province": "Murillo"
     },
     {
       "id": "e4",
@@ -1781,7 +1787,9 @@
       "delivery": true,
       "ownerName": "Rosario Mamani",
       "instagram": "@nanduti.textiles",
-      "createdInDays": -10
+      "createdInDays": -10,
+      "department": "Chuquisaca",
+      "province": "Oropeza"
     },
     {
       "id": "e5",
@@ -1820,7 +1828,9 @@
       "delivery": false,
       "ownerName": "Diego Aguilar",
       "instagram": "@pixelbo.studio",
-      "createdInDays": -5
+      "createdInDays": -5,
+      "department": "Santa Cruz",
+      "province": "Andrés Ibáñez"
     },
     {
       "id": "e6",
@@ -1860,7 +1870,9 @@
       "delivery": false,
       "ownerName": "Camila Torrez",
       "instagram": "@raices.spa",
-      "createdInDays": -2
+      "createdInDays": -2,
+      "department": "Cochabamba",
+      "province": "Cercado"
     }
   ],
   "posts": [
@@ -2250,11 +2262,844 @@
       "summary": "Busco profesionales y técnicos de confianza para mi casa y mi negocio.",
       "isProfilePublic": true,
       "isEmployerVerified": false
+    },
+    {
+      "id": "demo_tourist",
+      "role": "tourist",
+      "name": "Lucía Fernández",
+      "email": "lucia.fernandez@gmail.com",
+      "phoneIntl": "59177001122",
+      "city": "Cochabamba",
+      "department": "Cochabamba",
+      "province": "Cercado",
+      "summary": "Viajo por Bolivia con mi familia. Me gustan los paisajes, la comida y las artesanías.",
+      "languages": [
+        "Español",
+        "Inglés"
+      ],
+      "isProfilePublic": false,
+      "isEmployerVerified": false
     }
   ],
   "savedOpportunityIds": [
     "b1",
     "k1",
     "c1"
+  ],
+  "demoBusiness": {
+    "userId": "demo_employer",
+    "sector": "tecnologia",
+    "businessType": "software",
+    "tagline": "Software para equipos de producto en Bolivia",
+    "department": "La Paz",
+    "province": "Murillo",
+    "city": "La Paz",
+    "address": "Av. Arce 2631, Edificio Multicine, piso 7",
+    "phone": "59170011223",
+    "email": "talento@andinatech.bo",
+    "website": "andinatech.bo",
+    "hours": "Lun–Vie 08:30–18:30",
+    "description": "Empresa de software con 45 colaboradores. Desarrollamos productos web y móviles para banca, retail y salud.",
+    "attributes": {
+      "services": [
+        "Desarrollo web y móvil",
+        "Consultoría de producto",
+        "Equipos dedicados"
+      ]
+    }
+  },
+  "businesses": [
+    {
+      "id": "demo_biz_hotel_chain",
+      "name": "Hoteles Illimani",
+      "companyName": "Hoteles Illimani",
+      "sector": "hospedaje",
+      "businessType": "cadena_hotelera",
+      "department": "La Paz",
+      "province": "Murillo",
+      "city": "La Paz",
+      "address": "Av. 16 de Julio 1800, El Prado",
+      "phone": "59122334455",
+      "email": "reservas@hotelesillimani.bo",
+      "tagline": "Hoteles de ciudad en La Paz, Cochabamba y Santa Cruz",
+      "description": "Cadena boliviana con tres hoteles en el centro de cada ciudad. Habitaciones amplias, desayuno buffet con productos locales y atención 24 horas.",
+      "hours": "Recepción 24 horas",
+      "attributes": {
+        "stars": 4,
+        "checkIn": "14:00",
+        "checkOut": "12:00",
+        "amenities": [
+          "Wi-Fi",
+          "Desayuno incluido",
+          "Parqueo",
+          "Gimnasio",
+          "Recepción 24 h",
+          "Traslado al aeropuerto"
+        ],
+        "languages": [
+          "Español",
+          "Inglés",
+          "Portugués"
+        ],
+        "branches": [
+          {
+            "name": "Illimani La Paz",
+            "department": "La Paz",
+            "province": "Murillo",
+            "city": "La Paz",
+            "address": "Av. 16 de Julio 1800",
+            "phone": "59122334455"
+          },
+          {
+            "name": "Illimani Cochabamba",
+            "department": "Cochabamba",
+            "province": "Cercado",
+            "city": "Cochabamba",
+            "address": "Av. Ballivián 650, El Prado",
+            "phone": "59144556677"
+          },
+          {
+            "name": "Illimani Santa Cruz",
+            "department": "Santa Cruz",
+            "province": "Andrés Ibáñez",
+            "city": "Santa Cruz de la Sierra",
+            "address": "Calle Libertad 210, centro",
+            "phone": "59133667788"
+          }
+        ]
+      },
+      "offerings": [
+        {
+          "kind": "room",
+          "title": "Habitación estándar",
+          "description": "Cama matrimonial, escritorio y vista a la ciudad.",
+          "price": "Bs 420",
+          "priceAmount": 420,
+          "unit": "por noche",
+          "capacity": 2,
+          "details": {
+            "beds": "1 cama matrimonial",
+            "amenities": [
+              "Wi-Fi",
+              "TV cable",
+              "Calefacción"
+            ]
+          }
+        },
+        {
+          "kind": "room",
+          "title": "Habitación doble twin",
+          "description": "Dos camas de plaza y media, ideal para amigos o colegas.",
+          "price": "Bs 480",
+          "priceAmount": 480,
+          "unit": "por noche",
+          "capacity": 2,
+          "details": {
+            "beds": "2 camas de plaza y media",
+            "amenities": [
+              "Wi-Fi",
+              "TV cable",
+              "Calefacción"
+            ]
+          }
+        },
+        {
+          "kind": "room",
+          "title": "Suite familiar",
+          "description": "Dormitorio y sala separados, para cuatro personas.",
+          "price": "Bs 780",
+          "priceAmount": 780,
+          "unit": "por noche",
+          "capacity": 4,
+          "details": {
+            "beds": "1 cama king + 1 sofá cama",
+            "amenities": [
+              "Wi-Fi",
+              "Minibar",
+              "Bañera",
+              "Vista panorámica"
+            ]
+          }
+        }
+      ],
+      "promotions": [
+        {
+          "title": "Fin de semana en la ciudad",
+          "description": "Dos noches con desayuno y late check-out hasta las 15:00.",
+          "discount": "20% de descuento",
+          "validInDays": 45
+        }
+      ],
+      "rating": 4.6
+    },
+    {
+      "id": "demo_biz_hotel_sucre",
+      "name": "Hotel Casa Colonial",
+      "companyName": "Hotel Casa Colonial",
+      "sector": "hospedaje",
+      "businessType": "hotel_independiente",
+      "department": "Chuquisaca",
+      "province": "Oropeza",
+      "city": "Sucre",
+      "address": "Calle Nicolás Ortiz 45, a una cuadra de la plaza 25 de Mayo",
+      "phone": "59164612345",
+      "email": "hola@casacolonialsucre.bo",
+      "tagline": "Casona del siglo XVIII en el centro histórico de Sucre",
+      "description": "Hotel independiente de 14 habitaciones en una casona restaurada, con patio de naranjos y terraza con vista a las cúpulas de la ciudad blanca.",
+      "hours": "Recepción 07:00–23:00",
+      "attributes": {
+        "stars": 3,
+        "checkIn": "13:00",
+        "checkOut": "11:00",
+        "amenities": [
+          "Wi-Fi",
+          "Desayuno incluido",
+          "Terraza",
+          "Patio colonial",
+          "Información turística"
+        ],
+        "languages": [
+          "Español",
+          "Inglés",
+          "Francés"
+        ]
+      },
+      "offerings": [
+        {
+          "kind": "room",
+          "title": "Habitación colonial",
+          "description": "Techos altos, piso de madera y balcón al patio.",
+          "price": "Bs 300",
+          "priceAmount": 300,
+          "unit": "por noche",
+          "capacity": 2,
+          "details": {
+            "beds": "1 cama matrimonial",
+            "amenities": [
+              "Wi-Fi",
+              "Calefactor",
+              "Balcón"
+            ]
+          }
+        },
+        {
+          "kind": "room",
+          "title": "Habitación triple",
+          "description": "Para familias pequeñas o grupos de amigos.",
+          "price": "Bs 390",
+          "priceAmount": 390,
+          "unit": "por noche",
+          "capacity": 3,
+          "details": {
+            "beds": "1 matrimonial + 1 individual",
+            "amenities": [
+              "Wi-Fi",
+              "Calefactor"
+            ]
+          }
+        }
+      ],
+      "promotions": [
+        {
+          "title": "Temporada baja en Sucre",
+          "description": "La tercera noche es gratis de lunes a jueves.",
+          "discount": "3x2 en noches",
+          "validInDays": 60
+        }
+      ],
+      "rating": 4.8
+    },
+    {
+      "id": "demo_biz_hostal_samaipata",
+      "name": "Hostal Las Cuevas",
+      "companyName": "Hostal Las Cuevas",
+      "sector": "hospedaje",
+      "businessType": "hostal",
+      "department": "Santa Cruz",
+      "province": "Florida",
+      "city": "Samaipata",
+      "address": "Calle Bolívar s/n, a dos cuadras de la plaza",
+      "phone": "59178112233",
+      "email": "lascuevas.samaipata@gmail.com",
+      "tagline": "Hostal familiar al pie del Fuerte de Samaipata",
+      "description": "Habitaciones privadas y compartidas rodeadas de jardín. Organizamos salidas al Fuerte, Amboró y las cascadas de Las Cuevas.",
+      "hours": "Recepción 07:00–22:00",
+      "attributes": {
+        "stars": 2,
+        "checkIn": "12:00",
+        "checkOut": "10:00",
+        "amenities": [
+          "Wi-Fi",
+          "Cocina compartida",
+          "Jardín",
+          "Hamacas",
+          "Información turística"
+        ],
+        "languages": [
+          "Español",
+          "Inglés",
+          "Alemán"
+        ]
+      },
+      "offerings": [
+        {
+          "kind": "room",
+          "title": "Cama en dormitorio compartido",
+          "description": "Dormitorio de seis camas con casilleros.",
+          "price": "Bs 70",
+          "priceAmount": 70,
+          "unit": "por noche, por persona",
+          "capacity": 1,
+          "details": {
+            "beds": "Litera",
+            "amenities": [
+              "Casillero",
+              "Ropa de cama"
+            ]
+          }
+        },
+        {
+          "kind": "room",
+          "title": "Habitación privada con baño",
+          "description": "Matrimonial con vista al jardín.",
+          "price": "Bs 180",
+          "priceAmount": 180,
+          "unit": "por noche",
+          "capacity": 2,
+          "details": {
+            "beds": "1 cama matrimonial",
+            "amenities": [
+              "Baño privado",
+              "Agua caliente"
+            ]
+          }
+        }
+      ],
+      "promotions": [],
+      "rating": 4.5
+    },
+    {
+      "id": "demo_biz_agency_uyuni",
+      "name": "Uyuni Expediciones",
+      "companyName": "Uyuni Expediciones",
+      "sector": "turismo",
+      "businessType": "agencia_viajes",
+      "department": "Potosí",
+      "province": "Antonio Quijarro",
+      "city": "Uyuni",
+      "address": "Av. Ferroviaria 120, frente a la estación",
+      "phone": "59169012345",
+      "email": "reservas@uyuniexpediciones.bo",
+      "tagline": "Salar de Uyuni y lagunas de colores con guías locales",
+      "description": "Agencia de viajes con 12 años organizando expediciones al Salar de Uyuni, la Reserva Eduardo Avaroa y el desierto de Siloli. Vehículos 4x4 con chofer-guía y cocinera.",
+      "hours": "Todos los días 08:00–20:00",
+      "attributes": {
+        "languages": [
+          "Español",
+          "Inglés",
+          "Portugués"
+        ],
+        "destinations": [
+          "Salar de Uyuni",
+          "Laguna Colorada",
+          "Desierto de Siloli",
+          "Isla Incahuasi"
+        ],
+        "license": "Registro VMT 2014-0456",
+        "certifications": [
+          "Operador registrado en el Viceministerio de Turismo"
+        ]
+      },
+      "offerings": [
+        {
+          "kind": "package",
+          "title": "Salar de Uyuni y lagunas · 3 días",
+          "description": "La ruta clásica: salar, Isla Incahuasi, lagunas Colorada y Verde, géiseres y aguas termales.",
+          "price": "Bs 1.450",
+          "priceAmount": 1450,
+          "unit": "por persona",
+          "duration": "3 días / 2 noches",
+          "capacity": 6,
+          "details": {
+            "includes": [
+              "Transporte 4x4 con chofer-guía",
+              "Alojamiento en refugios",
+              "Todas las comidas",
+              "Entradas a la reserva no incluidas"
+            ],
+            "itinerary": [
+              "Día 1: Cementerio de trenes, Colchani y Salar de Uyuni con atardecer",
+              "Día 2: Lagunas altiplánicas, árbol de piedra y Laguna Colorada",
+              "Día 3: Géiseres Sol de Mañana, aguas termales de Polques y retorno"
+            ],
+            "meetingPoint": "Oficina de la Av. Ferroviaria, 10:00"
+          }
+        },
+        {
+          "kind": "package",
+          "title": "Atardecer y noche de estrellas en el salar",
+          "description": "Tarde completa en el salar con fotos de perspectiva, atardecer y observación de estrellas.",
+          "price": "Bs 380",
+          "priceAmount": 380,
+          "unit": "por persona",
+          "duration": "8 horas",
+          "capacity": 6,
+          "details": {
+            "includes": [
+              "Transporte 4x4",
+              "Cena ligera",
+              "Botas de lluvia en temporada de espejo"
+            ],
+            "itinerary": [
+              "15:00 salida",
+              "Fotos de perspectiva",
+              "Atardecer",
+              "Observación de estrellas y retorno 23:00"
+            ]
+          }
+        }
+      ],
+      "promotions": [
+        {
+          "title": "Reserva anticipada",
+          "description": "Reserva el tour de 3 días con un mes de anticipación.",
+          "discount": "15% de descuento",
+          "validInDays": 90
+        }
+      ],
+      "rating": 4.9
+    },
+    {
+      "id": "demo_biz_operator_rurre",
+      "name": "Pampas & Selva Rurrenabaque",
+      "companyName": "Pampas & Selva Rurrenabaque",
+      "sector": "turismo",
+      "businessType": "operador_turistico",
+      "department": "Beni",
+      "province": "General Jose Ballivian",
+      "city": "Rurrenabaque",
+      "address": "Calle Comercio 15, a media cuadra del puerto",
+      "phone": "59171456789",
+      "email": "info@pampasyselva.bo",
+      "tagline": "Amazonía boliviana: Parque Madidi y pampas del Yacuma",
+      "description": "Operador turístico de la Amazonía. Tours a la selva del Madidi y a las pampas con alojamiento en lodges comunitarios.",
+      "hours": "Lun–Dom 07:00–19:00",
+      "attributes": {
+        "languages": [
+          "Español",
+          "Inglés"
+        ],
+        "destinations": [
+          "Parque Nacional Madidi",
+          "Pampas del Yacuma",
+          "Río Beni"
+        ]
+      },
+      "offerings": [
+        {
+          "kind": "package",
+          "title": "Pampas del Yacuma · 3 días",
+          "description": "Navegación en bote para ver delfines rosados, caimanes, capibaras y aves.",
+          "price": "Bs 1.100",
+          "priceAmount": 1100,
+          "unit": "por persona",
+          "duration": "3 días / 2 noches",
+          "capacity": 8,
+          "details": {
+            "includes": [
+              "Transporte terrestre y fluvial",
+              "Lodge con mosquiteros",
+              "Comidas",
+              "Guía naturalista"
+            ],
+            "itinerary": [
+              "Día 1: viaje a Santa Rosa y navegación al lodge",
+              "Día 2: búsqueda de anacondas y nado con delfines rosados",
+              "Día 3: amanecer en el río y retorno"
+            ]
+          }
+        },
+        {
+          "kind": "package",
+          "title": "Selva del Madidi · 4 días",
+          "description": "Caminatas de interpretación, plantas medicinales y noche en la selva.",
+          "price": "Bs 1.650",
+          "priceAmount": 1650,
+          "unit": "por persona",
+          "duration": "4 días / 3 noches",
+          "capacity": 8,
+          "details": {
+            "includes": [
+              "Bote por el río Beni",
+              "Lodge comunitario",
+              "Comidas",
+              "Guía local"
+            ],
+            "itinerary": [
+              "Día 1: navegación por el río Beni",
+              "Día 2: caminata y collpa de guacamayos",
+              "Día 3: caminata nocturna",
+              "Día 4: retorno"
+            ]
+          }
+        }
+      ],
+      "promotions": [],
+      "rating": 4.7
+    },
+    {
+      "id": "demo_biz_guides_lapaz",
+      "name": "Andes Trek Guías",
+      "companyName": "Andes Trek Guías",
+      "sector": "turismo",
+      "businessType": "guias_turisticos",
+      "department": "La Paz",
+      "province": "Murillo",
+      "city": "La Paz",
+      "address": "Calle Sagárnaga 339, oficina 4",
+      "phone": "59172233114",
+      "email": "andestrek.guias@gmail.com",
+      "tagline": "Guías de montaña certificados en la Cordillera Real",
+      "description": "Empresa de guías de montaña y trekking. Ascensos al Huayna Potosí, caminatas por el Choro y Takesi, y salidas de un día a Chacaltaya.",
+      "hours": "Lun–Sáb 09:00–19:00",
+      "attributes": {
+        "languages": [
+          "Español",
+          "Inglés",
+          "Francés"
+        ],
+        "destinations": [
+          "Huayna Potosí",
+          "Chacaltaya",
+          "Camino del Choro",
+          "Valle de las Ánimas"
+        ],
+        "certifications": [
+          "Asociación de Guías de Montaña de Bolivia"
+        ]
+      },
+      "offerings": [
+        {
+          "kind": "package",
+          "title": "Ascenso al Huayna Potosí · 3 días",
+          "description": "Montaña de 6.088 m con guía certificado y equipo completo.",
+          "price": "Bs 1.900",
+          "priceAmount": 1900,
+          "unit": "por persona",
+          "duration": "3 días",
+          "capacity": 4,
+          "details": {
+            "includes": [
+              "Guía certificado",
+              "Equipo técnico",
+              "Refugios",
+              "Comidas en la montaña"
+            ],
+            "itinerary": [
+              "Día 1: práctica en el glaciar",
+              "Día 2: subida al campo alto",
+              "Día 3: cumbre y descenso"
+            ]
+          }
+        },
+        {
+          "kind": "package",
+          "title": "Chacaltaya y Valle de la Luna",
+          "description": "Salida de un día a 5.300 m y paseo por el Valle de la Luna.",
+          "price": "Bs 220",
+          "priceAmount": 220,
+          "unit": "por persona",
+          "duration": "1 día",
+          "capacity": 12,
+          "details": {
+            "includes": [
+              "Transporte",
+              "Guía",
+              "Refrigerio"
+            ],
+            "itinerary": [
+              "08:30 salida a Chacaltaya",
+              "13:00 almuerzo libre",
+              "15:00 Valle de la Luna"
+            ]
+          }
+        }
+      ],
+      "promotions": [],
+      "rating": 4.8
+    },
+    {
+      "id": "demo_biz_restaurant_copa",
+      "name": "Sabores del Lago",
+      "companyName": "Sabores del Lago",
+      "sector": "gastronomia",
+      "businessType": "restaurante",
+      "department": "La Paz",
+      "province": "Manco Kapac",
+      "city": "Copacabana",
+      "address": "Av. 6 de Agosto, frente a la playa",
+      "phone": "59172600112",
+      "email": "saboresdellago@gmail.com",
+      "tagline": "Trucha del Titicaca y cocina andina frente al lago",
+      "description": "Restaurante familiar con terraza frente al lago Titicaca. La trucha llega cada mañana de los criaderos de la comunidad.",
+      "hours": "Todos los días 11:00–21:30",
+      "attributes": {
+        "cuisine": "Andina y pescados del lago",
+        "priceRange": "$$",
+        "services": [
+          "Terraza con vista al lago",
+          "Menú vegetariano",
+          "Reservas para grupos"
+        ]
+      },
+      "offerings": [
+        {
+          "kind": "dish",
+          "title": "Trucha a la plancha",
+          "description": "Con papas, arroz y ensalada.",
+          "price": "Bs 55",
+          "priceAmount": 55,
+          "details": {
+            "category": "Platos fuertes"
+          }
+        },
+        {
+          "kind": "dish",
+          "title": "Trucha a la diabla",
+          "description": "En salsa picante de ají amarillo.",
+          "price": "Bs 60",
+          "priceAmount": 60,
+          "details": {
+            "category": "Platos fuertes"
+          }
+        },
+        {
+          "kind": "dish",
+          "title": "Sopa de quinua",
+          "description": "Con verduras de la región.",
+          "price": "Bs 20",
+          "priceAmount": 20,
+          "details": {
+            "category": "Entradas"
+          }
+        },
+        {
+          "kind": "dish",
+          "title": "Api con pastel",
+          "description": "Bebida caliente de maíz morado.",
+          "price": "Bs 15",
+          "priceAmount": 15,
+          "details": {
+            "category": "Bebidas"
+          }
+        }
+      ],
+      "promotions": [
+        {
+          "title": "Martes de trucha",
+          "description": "Dos truchas a la plancha por el precio de una, todos los martes.",
+          "discount": "2x1",
+          "validInDays": 30
+        }
+      ],
+      "rating": 4.6
+    },
+    {
+      "id": "demo_biz_restaurant_tarija",
+      "name": "Bodega y Restaurante El Valle",
+      "companyName": "Bodega y Restaurante El Valle",
+      "sector": "gastronomia",
+      "businessType": "restaurante",
+      "department": "Tarija",
+      "province": "Cercado",
+      "city": "Tarija",
+      "address": "Calle La Madrid 340",
+      "phone": "59146634455",
+      "email": "reservas@bodegaelvalle.bo",
+      "tagline": "Comida chapaca y vinos de altura",
+      "description": "Cocina tradicional tarijeña con vinos y singanis del valle central. Visitas guiadas a la bodega los sábados.",
+      "hours": "Mar–Dom 12:00–23:00",
+      "attributes": {
+        "cuisine": "Chapaca",
+        "priceRange": "$$$",
+        "services": [
+          "Cata de vinos",
+          "Visita a la bodega",
+          "Música en vivo los viernes"
+        ]
+      },
+      "offerings": [
+        {
+          "kind": "dish",
+          "title": "Saice tarijeño",
+          "description": "Guiso picante de carne con chuño y arroz.",
+          "price": "Bs 45",
+          "priceAmount": 45,
+          "details": {
+            "category": "Platos fuertes"
+          }
+        },
+        {
+          "kind": "dish",
+          "title": "Cata de tres vinos",
+          "description": "Tannat, malbec y moscatel de Alejandría.",
+          "price": "Bs 90",
+          "priceAmount": 90,
+          "details": {
+            "category": "Vinos"
+          }
+        }
+      ],
+      "promotions": [
+        {
+          "title": "Ruta del vino",
+          "description": "Visita a la bodega más almuerzo chapaco.",
+          "discount": "Bs 150 por persona",
+          "validInDays": 40
+        }
+      ],
+      "rating": 4.7
+    }
+  ],
+  "tourismProfessionals": [
+    {
+      "profile": {
+        "id": "demo_guide_rodrigo",
+        "role": "seeker",
+        "name": "Rodrigo Quispe",
+        "email": "rodrigo.quispe.guia@gmail.com",
+        "phoneIntl": "59176112233",
+        "city": "La Paz",
+        "department": "La Paz",
+        "province": "Murillo",
+        "specialty": "Guía de turismo bilingüe",
+        "career": "Técnico en Turismo",
+        "summary": "Guía de turismo con 8 años de experiencia en La Paz, Tiwanaku y el lago Titicaca. Hablo español, inglés y aymara.",
+        "serviceCategories": [
+          "Guía de turismo"
+        ],
+        "languages": [
+          "Español",
+          "Inglés",
+          "Aymara"
+        ],
+        "skills": [
+          "Historia andina",
+          "Primeros auxilios",
+          "Fotografía"
+        ],
+        "rating": 4.9
+      },
+      "offerings": [
+        {
+          "kind": "tour",
+          "title": "Tiwanaku y Puma Punku con guía",
+          "description": "Visita guiada a los templos y al museo lítico, con almuerzo en la comunidad.",
+          "price": "Bs 250",
+          "priceAmount": 250,
+          "unit": "por persona",
+          "duration": "1 día",
+          "capacity": 10,
+          "details": {
+            "includes": [
+              "Transporte",
+              "Guía",
+              "Almuerzo"
+            ],
+            "languages": [
+              "Español",
+              "Inglés"
+            ],
+            "meetingPoint": "Plaza San Francisco, 08:00"
+          }
+        },
+        {
+          "kind": "tour",
+          "title": "Caminata por el centro histórico de La Paz",
+          "description": "Calle Jaén, mercado de las brujas y miradores.",
+          "price": "Bs 80",
+          "priceAmount": 80,
+          "unit": "por persona",
+          "duration": "3 horas",
+          "capacity": 12,
+          "details": {
+            "languages": [
+              "Español",
+              "Inglés",
+              "Aymara"
+            ],
+            "meetingPoint": "Iglesia de San Francisco, 10:00"
+          }
+        }
+      ]
+    }
+  ],
+  "storeOwnerOfferings": {
+    "rosario": [
+      {
+        "kind": "workshop",
+        "title": "Taller de tejido tradicional en telar",
+        "description": "Aprende la técnica de tejido de Tarabuco con artesanas de la comunidad y llévate tu pieza.",
+        "price": "Bs 150",
+        "priceAmount": 150,
+        "unit": "por persona",
+        "duration": "3 horas",
+        "capacity": 8,
+        "details": {
+          "includes": [
+            "Materiales",
+            "Té con k'ispiña",
+            "Tu tejido terminado"
+          ],
+          "schedule": "Martes y jueves 15:00",
+          "meetingPoint": "Mercado Central de Sucre, puesto 42"
+        }
+      }
+    ]
+  },
+  "storeOwnerCategories": {
+    "rosario": [
+      "Artesanía y talleres"
+    ]
+  },
+  "storePromotions": [
+    {
+      "storeId": "e1",
+      "title": "Torta de cumpleaños con envío gratis",
+      "description": "Pedidos con 48 horas de anticipación.",
+      "discount": "Envío gratis",
+      "validInDays": 20
+    },
+    {
+      "storeId": "e4",
+      "title": "Chalina de alpaca + taller",
+      "description": "Compra una chalina y el taller de tejido te sale a mitad de precio.",
+      "discount": "50% en el taller",
+      "validInDays": 30
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "demo_inquiry_1",
+      "from": "demo_tourist",
+      "to": "demo_biz_agency_uyuni",
+      "offering": 0,
+      "message": "Hola, somos 4 adultos y queremos hacer el tour de 3 días a fines de mes. ¿Tienen cupo?",
+      "travelInDays": 20,
+      "people": 4,
+      "reply": "¡Hola Lucía! Sí, tenemos cupo para el 28. Te reservamos un 4x4 solo para tu grupo. Escríbenos por WhatsApp para confirmar.",
+      "createdInDays": -2,
+      "repliedInDays": -1
+    },
+    {
+      "id": "demo_inquiry_2",
+      "from": "demo_tourist",
+      "to": "demo_biz_hotel_sucre",
+      "offering": 0,
+      "message": "¿La habitación colonial tiene calefacción? Viajamos en julio.",
+      "travelInDays": 40,
+      "people": 2,
+      "createdInDays": -1
+    }
   ]
 }

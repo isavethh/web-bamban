@@ -6,29 +6,31 @@ before(resetDatabase);
 after(closePool);
 
 describe('emprendimientos', () => {
-  test('lista las tiendas sin revelar el usuario del dueño', async () => {
+  test('lista las tiendas con su dueño profesional y su lugar', async () => {
     const res = await api().get('/api/stores').expect(200);
     assert.equal(res.body.length, 6);
-    assert.ok(res.body.every((s) => s.ownerId === null));
     const marta = await api().get('/api/stores/tortas-y-empanadas-marta').expect(200);
     assert.equal(marta.body.products.length, 4);
+    assert.equal(marta.body.ownerId, 'demo_owner_marta');
+    assert.equal(marta.body.department, 'Santa Cruz');
+    const owner = await api().get('/api/profiles/demo_owner_marta').expect(200);
+    assert.equal(owner.body.role, 'seeker');
   });
 
-  test('registro, varias tiendas por cuenta y slugs únicos', async () => {
+  test('un profesional crea varias tiendas con enlaces únicos', async () => {
     const owner = await registerOwner('Salteñas Don Juan');
-    assert.equal(owner.stores.length, 1);
     assert.equal(owner.stores[0].publicSlug, 'saltenas-don-juan-2');
-    assert.equal(owner.stores[0].ownerId, owner.owner.username);
+    assert.equal(owner.stores[0].ownerId, owner.user.id);
 
     const second = await api()
-      .post('/api/owners/me/stores')
+      .post('/api/me/stores')
       .set(owner.auth)
       .send({ name: 'Segunda tienda', category: 'Artesanía', delivery: true })
       .expect(201);
     assert.equal(second.body.category, 'Artesanía');
 
     const updated = await api()
-      .put(`/api/owners/me/stores/${second.body.id}`)
+      .put(`/api/me/stores/${second.body.id}`)
       .set(owner.auth)
       .send({ hours: 'Lun–Vie 9–18', products: [{ name: 'Aguayo', price: 'Bs 200' }] })
       .expect(200);
@@ -36,32 +38,29 @@ describe('emprendimientos', () => {
     assert.equal(updated.body.category, 'Artesanía');
     assert.equal(updated.body.products[0].name, 'Aguayo');
 
-    const me = await api().get('/api/owners/me').set(owner.auth).expect(200);
-    assert.equal(me.body.stores.length, 2);
-
-    const login = await api()
-      .post('/api/owners/login')
-      .send({ username: owner.owner.username, password: 'secreto123' })
-      .expect(200);
-    assert.equal(login.body.stores.length, 2);
+    const mine = await api().get('/api/me/stores').set(owner.auth).expect(200);
+    assert.equal(mine.body.length, 2);
   });
 
-  test('un dueño no edita tiendas ajenas y un usuario normal no entra aquí', async () => {
+  test('solo un profesional tiene emprendimientos y nadie edita los ajenos', async () => {
     const a = await registerOwner('Tienda A');
     const b = await registerOwner('Tienda B');
     await api()
-      .put(`/api/owners/me/stores/${a.stores[0].id}`)
+      .put(`/api/me/stores/${a.stores[0].id}`)
       .set(b.auth)
       .send({ name: 'Robada' })
       .expect(403);
-    const user = await registerUser();
-    await api().get('/api/owners/me').set(user.auth).expect(403);
+    for (const role of ['employer', 'tourist', 'serviceSeeker']) {
+      const other = await registerUser({
+        role,
+        ...(role === 'employer' && { businessSector: 'comercio', businessType: 'tienda' }),
+      });
+      await api().post('/api/me/stores').set(other.auth).send({ name: 'X' }).expect(403);
+    }
   });
 
-  test('ingreso demo como emprendedora', async () => {
-    const res = await api().post('/api/owners/demo').expect(200);
-    assert.equal(res.body.owner.username, 'marta');
-    assert.equal(res.body.stores[0].id, 'e1');
+  test('ya no existen las cuentas aparte de emprendedor', async () => {
+    await api().post('/api/owners/login').send({ username: 'marta', password: 'x' }).expect(404);
   });
 });
 
@@ -102,14 +101,21 @@ describe('comunidad', () => {
     assert.ok(!all.body.some((p) => p.id === post.body.id));
   });
 
-  test('un emprendedor publica como su tienda', async () => {
+  test('un profesional publica como su emprendimiento', async () => {
     const owner = await registerOwner('Café del Sol');
     const storeId = owner.stores[0].id;
-    await api()
+    const asPerson = await api()
       .post('/api/posts')
       .set(owner.auth)
-      .send({ kind: 'offering', body: 'Nuevo menú' })
-      .expect(400);
+      .send({ kind: 'offering', body: 'Hola' })
+      .expect(201);
+    assert.equal(asPerson.body.author.id, owner.user.id);
+    const intruder = await registerOwner('Otra');
+    await api()
+      .post('/api/posts')
+      .set(intruder.auth)
+      .send({ kind: 'offering', body: 'Hola', asStoreId: storeId })
+      .expect(403);
     const post = await api()
       .post('/api/posts')
       .set(owner.auth)

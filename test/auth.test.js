@@ -27,7 +27,7 @@ describe('registro e ingreso', () => {
     const { user } = await registerUser();
     const res = await api()
       .post('/api/auth/register')
-      .send({ name: 'Otra', email: user.email, password: 'secreto123', role: 'employer' })
+      .send({ name: 'Otra', email: user.email, password: 'secreto123', role: 'tourist' })
       .expect(409);
     assert.match(res.body.error, /ya está registrado/);
   });

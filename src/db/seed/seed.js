@@ -6,6 +6,7 @@ import { newId } from '../../lib/text.js';
 import * as users from '../../modules/users/users.repo.js';
 import * as opps from '../../modules/opportunities/opportunities.repo.js';
 import * as stores from '../../modules/stores/stores.repo.js';
+import * as business from '../../modules/business/business.repo.js';
 import { insertPost } from '../../modules/community/community.routes.js';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -135,17 +136,24 @@ export async function seedDemo({ log = console.log } = {}) {
       );
     }
 
+    // Cada tienda es de un profesional: se crea su cuenta si falta.
+    const ownerId = (username) => `demo_owner_${username}`;
     for (const s of data.stores) {
       if (await exists('stores', s.id, tx)) continue;
-      let owner = await stores.findOwnerByUsername(s.ownerId, tx);
-      if (!owner) {
-        owner = { id: `demo_owner_${s.ownerId}` };
-        await stores.insertOwner(
+      if (!(await exists('users', ownerId(s.ownerId), tx))) {
+        await users.insertUser(
           {
-            id: owner.id,
-            username: s.ownerId,
+            id: ownerId(s.ownerId),
+            email: `${s.ownerId}@emprendedores.tucan.bo`,
             passwordHash: unusablePassword,
-            displayName: s.ownerName,
+            role: 'seeker',
+            name: s.ownerName,
+            phoneIntl: s.phone,
+            city: s.city,
+            department: s.department,
+            province: s.province,
+            specialty: s.category,
+            serviceCategories: data.storeOwnerCategories[s.ownerId] ?? null,
             isDemo: true,
           },
           tx,
@@ -154,13 +162,145 @@ export async function seedDemo({ log = console.log } = {}) {
       await stores.insertStore(
         {
           ...s,
-          ownerId: owner.id,
+          ownerId: ownerId(s.ownerId),
           slug: s.publicSlug ?? (await stores.freeSlug(s.name, tx)),
           createdAt: fromNow(s.createdInDays),
         },
         tx,
       );
       count('stores');
+    }
+
+    // Empresa demo (AndinaTech): rubro y perfil de negocio.
+    const { userId: demoEmployerId, ...demoBusiness } = data.demoBusiness;
+    if (!(await business.findBusiness(demoEmployerId, tx))) {
+      await business.upsertBusiness(demoEmployerId, demoBusiness, tx);
+    }
+
+    const addOfferings = async (owner, list) => {
+      for (const [i, o] of list.entries()) {
+        const id = `${owner.id}_offering_${i + 1}`;
+        if (await exists('offerings', id, tx)) continue;
+        await business.insertOffering(
+          id,
+          owner.id,
+          {
+            department: owner.department,
+            province: owner.province,
+            city: owner.city,
+            sortOrder: i,
+            ...o,
+          },
+          tx,
+        );
+        count('offerings');
+      }
+    };
+    const addPromotions = async (owner, list) => {
+      for (const [i, p] of list.entries()) {
+        const id = `${owner.id}_promotion_${i + 1}`;
+        if (await exists('promotions', id, tx)) continue;
+        const { validInDays, ...promo } = p;
+        await business.insertPromotion(
+          id,
+          owner.id,
+          {
+            department: owner.department,
+            province: owner.province,
+            city: owner.city,
+            validUntil: fromNow(validInDays)?.toISOString().slice(0, 10),
+            ...promo,
+          },
+          tx,
+        );
+        count('promotions');
+      }
+    };
+
+    // Negocios de turismo, hospedaje y gastronomía.
+    for (const b of data.businesses) {
+      const { offerings, promotions, rating, ...profile } = b;
+      if (!(await exists('users', b.id, tx))) {
+        await users.insertUser(
+          {
+            id: b.id,
+            email: b.email,
+            passwordHash: unusablePassword,
+            role: 'employer',
+            name: b.name,
+            companyName: b.companyName,
+            phoneIntl: b.phone,
+            city: b.city,
+            department: b.department,
+            province: b.province,
+            summary: b.description,
+            rating,
+            isEmployerVerified: true,
+            isDemo: true,
+          },
+          tx,
+        );
+        count('users');
+      }
+      if (!(await business.findBusiness(b.id, tx)))
+        await business.upsertBusiness(b.id, profile, tx);
+      await addOfferings(b, offerings);
+      await addPromotions(b, promotions);
+    }
+
+    // Profesionales que ofrecen tours y talleres.
+    for (const { profile, offerings } of data.tourismProfessionals) {
+      if (!(await exists('users', profile.id, tx))) {
+        await users.insertUser({ ...profile, passwordHash: unusablePassword, isDemo: true }, tx);
+        count('users');
+      }
+      await addOfferings(profile, offerings);
+    }
+    for (const [username, list] of Object.entries(data.storeOwnerOfferings)) {
+      const owner = await users.findById(ownerId(username), tx);
+      if (owner) await addOfferings(owner, list);
+    }
+    for (const [i, p] of data.storePromotions.entries()) {
+      const store = await stores.findById(p.storeId, tx);
+      if (!store) continue;
+      const id = `demo_store_promotion_${i + 1}`;
+      if (await exists('promotions', id, tx)) continue;
+      const { validInDays, ...promo } = p;
+      await business.insertPromotion(
+        id,
+        store.owner_user_id,
+        {
+          department: store.department,
+          province: store.province,
+          city: store.city,
+          validUntil: fromNow(validInDays)?.toISOString().slice(0, 10),
+          ...promo,
+        },
+        tx,
+      );
+      count('promotions');
+    }
+
+    // Consultas de la turista demo.
+    for (const q of data.inquiries) {
+      if (await exists('inquiries', q.id, tx)) continue;
+      await business.insertInquiry(
+        {
+          id: q.id,
+          fromUserId: q.from,
+          toUserId: q.to,
+          offeringId: `${q.to}_offering_${q.offering + 1}`,
+          message: q.message,
+          travelDate: fromNow(q.travelInDays)?.toISOString().slice(0, 10),
+          people: q.people,
+          status: q.reply ? 'respondida' : 'nueva',
+          reply: q.reply,
+          repliedAt: fromNow(q.repliedInDays),
+          createdAt: fromNow(q.createdInDays),
+        },
+        tx,
+      );
+      count('inquiries');
     }
 
     for (const p of data.posts) {

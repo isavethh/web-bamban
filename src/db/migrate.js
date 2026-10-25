@@ -25,9 +25,12 @@ export async function ensureDatabase(name = env.DB_NAME) {
   }
 }
 
-/** Aplica, en orden, las migraciones que aún no estén registradas. */
-export async function migrate({ log = console.log } = {}) {
-  const pool = await getPool();
+/**
+ * Aplica, en orden, las migraciones que aún no estén registradas.
+ * `until` se detiene después de esa migración (para probar actualizaciones).
+ */
+export async function migrate({ log = console.log, pool: target, until } = {}) {
+  const pool = target ?? (await getPool());
   await pool.request().query(`
     IF OBJECT_ID(N'schema_migrations') IS NULL
       CREATE TABLE schema_migrations (
@@ -40,7 +43,10 @@ export async function migrate({ log = console.log } = {}) {
   const files = (await readdir(migrationsDir)).filter((f) => f.endsWith('.sql')).sort();
 
   for (const file of files) {
-    if (applied.has(file)) continue;
+    if (applied.has(file)) {
+      if (file === until) break;
+      continue;
+    }
     const script = await readFile(path.join(migrationsDir, file), 'utf8');
     const tx = new sql.Transaction(pool);
     await tx.begin();
@@ -55,5 +61,6 @@ export async function migrate({ log = console.log } = {}) {
       await tx.rollback();
       throw new Error(`Falló la migración ${file}: ${err.message}`, { cause: err });
     }
+    if (file === until) break;
   }
 }

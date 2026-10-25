@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { sql, one, rows, query } from '../../db/pool.js';
 import { requireAuth } from '../../middleware/auth.js';
 import { validate } from '../../middleware/validate.js';
-import { badRequest, forbidden, notFound } from '../../lib/errors.js';
+import { forbidden, notFound } from '../../lib/errors.js';
 import { newId, parseJson } from '../../lib/text.js';
 import * as users from '../users/users.repo.js';
 import * as stores from '../stores/stores.repo.js';
@@ -18,36 +18,43 @@ const body = (max) =>
 const asStore = z.string().max(64).optional();
 const idParam = z.object({ id: z.string().min(1).max(64) });
 
+const ROLE_LABELS = {
+  seeker: 'Profesional / técnico',
+  serviceSeeker: 'Profesional / técnico',
+  employer: 'Empresa',
+  tourist: 'Turista',
+};
+
 /**
- * Quién actúa: la persona con sesión o, si es un emprendedor, una de sus
- * tiendas (`asStoreId`). Devuelve la identidad con la forma de `FeedIdentity`.
+ * Quién actúa: la persona con sesión o, si lo pide (`asStoreId`), uno de sus
+ * emprendimientos. Devuelve la identidad con la forma de `FeedIdentity`.
  */
 async function actor(req, asStoreId) {
-  if (req.auth.kind === 'user') {
-    const u = await users.findById(req.auth.id);
-    if (!u) throw forbidden('Tu cuenta ya no existe.');
-    const employer = u.role === 'employer';
+  const u = await users.findById(req.auth.id);
+  if (!u) throw forbidden('Tu cuenta ya no existe.');
+  if (asStoreId) {
+    // Un profesional también publica como uno de sus emprendimientos.
+    const store = await stores.findById(asStoreId);
+    if (!store || store.owner_user_id !== u.id) {
+      throw forbidden('Este emprendimiento pertenece a otra cuenta.');
+    }
     return {
-      id: u.id,
-      name: employer ? (u.company_name ?? u.name) : u.name,
-      role: employer ? 'Empresa' : 'Profesional / técnico',
-      city: u.city ?? '',
-      subtitle: u.specialty ?? u.career ?? '',
-      photoBase64: u.photo,
+      id: `store:${store.id}`,
+      name: store.name,
+      role: 'Emprendimiento',
+      city: store.city ?? '',
+      subtitle: store.category,
+      photoBase64: null,
     };
   }
-  if (!asStoreId) throw badRequest('Indica con qué emprendimiento publicas.');
-  const store = await stores.findById(asStoreId);
-  if (!store || store.owner_id !== req.auth.id) {
-    throw forbidden('Este emprendimiento pertenece a otra cuenta.');
-  }
+  const employer = u.role === 'employer';
   return {
-    id: `store:${store.id}`,
-    name: store.name,
-    role: 'Emprendimiento',
-    city: store.city ?? '',
-    subtitle: store.category,
-    photoBase64: null,
+    id: u.id,
+    name: employer ? (u.company_name ?? u.name) : u.name,
+    role: ROLE_LABELS[u.role] ?? 'Profesional / técnico',
+    city: u.city ?? '',
+    subtitle: u.specialty ?? u.career ?? '',
+    photoBase64: u.photo,
   };
 }
 
@@ -120,7 +127,7 @@ postsRouter.get('/', async (_req, res) => {
 
 postsRouter.post(
   '/',
-  requireAuth('user', 'owner'),
+  requireAuth('user'),
   validate({ body: z.object({ kind: z.enum(KINDS), body: body(3000), asStoreId: asStore }) }),
   async (req, res) => {
     const author = await actor(req, req.valid.body.asStoreId);
@@ -132,7 +139,7 @@ postsRouter.post(
 
 postsRouter.patch(
   '/:id',
-  requireAuth('user', 'owner'),
+  requireAuth('user'),
   validate({ params: idParam, body: z.object({ body: body(3000), asStoreId: asStore }) }),
   async (req, res) => {
     const { me, post } = await ownPost(req, req.valid.body.asStoreId);
@@ -147,7 +154,7 @@ postsRouter.patch(
 
 postsRouter.delete(
   '/:id',
-  requireAuth('user', 'owner'),
+  requireAuth('user'),
   validate({ params: idParam, query: z.object({ asStoreId: asStore }) }),
   async (req, res) => {
     const { me, post } = await ownPost(req, req.valid.query.asStoreId);
@@ -159,7 +166,7 @@ postsRouter.delete(
 
 postsRouter.post(
   '/:id/likes',
-  requireAuth('user', 'owner'),
+  requireAuth('user'),
   validate({ params: idParam, body: z.object({ asStoreId: asStore }) }),
   async (req, res) => {
     const { me, post } = await ownPost(req, req.valid.body.asStoreId);
@@ -177,7 +184,7 @@ postsRouter.post(
 
 postsRouter.post(
   '/:id/comments',
-  requireAuth('user', 'owner'),
+  requireAuth('user'),
   validate({ params: idParam, body: z.object({ body: body(1000), asStoreId: asStore }) }),
   async (req, res) => {
     const { me, post } = await ownPost(req, req.valid.body.asStoreId);

@@ -6,6 +6,8 @@ import { authLimiter } from '../../middleware/rate-limit.js';
 import { hashPassword, signToken, verifyPassword } from '../../lib/security.js';
 import { newId } from '../../lib/text.js';
 import { conflict, notFound, unauthorized } from '../../lib/errors.js';
+import { transaction } from '../../db/pool.js';
+import { upsertBusiness } from '../business/business.repo.js';
 import * as repo from './users.repo.js';
 import * as s from './users.schemas.js';
 
@@ -14,6 +16,7 @@ export const DEMO_USER_IDS = {
   seeker: 'demo_professional',
   employer: 'demo_employer',
   serviceSeeker: 'demo_service_seeker',
+  tourist: 'demo_tourist',
 };
 
 const session = (row) => ({ token: signToken('user', row.id), user: repo.toProfile(row) });
@@ -21,10 +24,28 @@ const session = (row) => ({ token: signToken('user', row.id), user: repo.toProfi
 export const authRouter = Router();
 
 authRouter.post('/register', authLimiter, validate({ body: s.registerBody }), async (req, res) => {
-  const { password, ...data } = req.valid.body;
+  const { password, businessSector, businessType, ...data } = req.valid.body;
   if (await repo.findByEmail(data.email)) throw conflict('El correo ya está registrado.');
   const id = newId();
-  await repo.insertUser({ ...data, id, passwordHash: await hashPassword(password) });
+  const passwordHash = await hashPassword(password);
+  await transaction(async (tx) => {
+    await repo.insertUser({ ...data, id, passwordHash }, tx);
+    if (data.role === 'employer') {
+      await upsertBusiness(
+        id,
+        {
+          sector: businessSector,
+          businessType,
+          city: data.city,
+          department: data.department,
+          province: data.province,
+          phone: data.phoneIntl,
+          email: data.email,
+        },
+        tx,
+      );
+    }
+  });
   res.status(201).json(session(await repo.findById(id)));
 });
 

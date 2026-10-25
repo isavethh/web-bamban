@@ -17,13 +17,16 @@ const { seedDemo } = await import('../src/db/seed/seed.js');
 const { loadDirectory } = await import('../src/modules/directory/load-directory.js');
 
 const TABLES = [
+  'inquiries',
+  'promotions',
+  'offerings',
+  'business_profiles',
   'labor_favorites',
   'labor_companies',
   'post_comments',
   'post_likes',
   'posts',
   'stores',
-  'store_owners',
   'saved_opportunities',
   'application_notes',
   'applications',
@@ -85,6 +88,7 @@ export async function registerUser(overrides = {}) {
       email: `prueba-${unique()}@correo.bo`,
       password: 'secreto123',
       role: 'seeker',
+      ...(overrides.role === 'employer' && { businessSector: 'empresarial', businessType: 'pyme' }),
       ...overrides,
     })
     .expect(201);
@@ -96,10 +100,13 @@ export async function demoLogin(role) {
   return { ...res.body, auth: { Authorization: `Bearer ${res.body.token}` } };
 }
 
+/** Profesional con un emprendimiento recién creado. */
 export async function registerOwner(storeName = 'Mi Tienda de Prueba') {
-  const res = await api()
-    .post('/api/owners/register')
-    .send({ username: `dueno${unique()}`, password: 'secreto123', store: { name: storeName } })
+  const pro = await registerUser({ name: 'Emprendedora de prueba' });
+  const store = await api()
+    .post('/api/me/stores')
+    .set(pro.auth)
+    .send({ name: storeName })
     .expect(201);
-  return { ...res.body, auth: { Authorization: `Bearer ${res.body.token}` } };
+  return { ...pro, stores: [store.body] };
 }

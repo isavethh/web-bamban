@@ -2,19 +2,20 @@ import { sql, one, rows, query } from '../../db/pool.js';
 import { parseJson, slugify } from '../../lib/text.js';
 
 /** Fila de `stores` → `Emprendimiento` del frontend. */
-export function toStore(r, { ownerUsername } = {}) {
+export function toStore(r) {
   return {
     id: r.id,
     name: r.name,
     description: r.description,
     products: parseJson(r.products, []),
     phone: r.phone,
-    // En la app, `ownerId` es el usuario con el que entra el emprendedor.
-    // Solo se devuelve a su dueño, nunca en el listado público.
-    ownerId: ownerUsername ?? null,
+    // El profesional dueño de la tienda.
+    ownerId: r.owner_user_id,
     image1Url: r.image1,
     image2Url: r.image2,
     category: r.category,
+    department: r.department,
+    province: r.province,
     city: r.city,
     address: r.address,
     hours: r.hours,
@@ -33,6 +34,8 @@ const COLUMNS = {
   name: ['name'],
   description: ['description', () => sql.NVarChar(3000)],
   phone: ['phone'],
+  department: ['department'],
+  province: ['province'],
   city: ['city'],
   address: ['address'],
   hours: ['hours'],
@@ -61,7 +64,7 @@ export const findBySlug = (slug) => one('SELECT * FROM stores WHERE slug = @slug
 export const findById = (id, executor) =>
   one('SELECT * FROM stores WHERE id = @id', { id }, executor);
 export const listByOwner = (ownerId) =>
-  rows('SELECT * FROM stores WHERE owner_id = @ownerId ORDER BY created_at', { ownerId });
+  rows('SELECT * FROM stores WHERE owner_user_id = @ownerId ORDER BY created_at', { ownerId });
 
 /** «mi-tienda», «mi-tienda-2»... el primero que no esté usado. */
 export async function freeSlug(name, executor) {
@@ -84,7 +87,7 @@ export async function insertStore(store, executor) {
   const p = params({ tags: [], products: [], ...store });
   const fields = Object.keys(p);
   await query(
-    `INSERT INTO stores (id, owner_id, slug, rating, reviews_count, created_at,
+    `INSERT INTO stores (id, owner_user_id, slug, rating, reviews_count, created_at,
        ${fields.map((f) => COLUMNS[f][0]).join(', ')})
      VALUES (@id, @ownerId, @slug, @rating, @reviewsCount, COALESCE(@createdAt, SYSUTCDATETIME()),
        ${fields.map((f) => `@${f}`).join(', ')})`,
@@ -109,25 +112,5 @@ export async function updateStore(id, changes) {
     `UPDATE stores SET ${fields.map((f) => `${COLUMNS[f][0]} = @${f}`).join(', ')},
        updated_at = SYSUTCDATETIME() WHERE id = @id`,
     { ...p, id },
-  );
-}
-
-export const findOwnerByUsername = (username, executor) =>
-  one('SELECT * FROM store_owners WHERE username = @username', { username }, executor);
-
-export const findOwnerById = (id) => one('SELECT * FROM store_owners WHERE id = @id', { id });
-
-export async function insertOwner(owner, executor) {
-  await query(
-    `INSERT INTO store_owners (id, username, password_hash, display_name, is_demo)
-     VALUES (@id, @username, @passwordHash, @displayName, @isDemo)`,
-    {
-      id: owner.id,
-      username: owner.username,
-      passwordHash: owner.passwordHash,
-      displayName: owner.displayName ?? null,
-      isDemo: [sql.Bit, Boolean(owner.isDemo)],
-    },
-    executor,
   );
 }

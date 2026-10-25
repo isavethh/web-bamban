@@ -1,6 +1,6 @@
 # Tucan API
 
-Backend de **Tucan** (empleo, comunidad y emprendimientos en Bolivia). La app
+Backend de **Tucan** (empleo, turismo, comunidad y emprendimientos en Bolivia). La app
 Flutter vive en el repositorio [`aplicaciondeempleo`](https://github.com/isavethh/aplicaciondeempleo)
 y consume esta API.
 
@@ -26,6 +26,10 @@ npm run dev                     # http://localhost:3000
 
 Con `docker compose up --build` se levantan la base y la API juntas; la API migra
 y carga los datos demo al arrancar.
+
+Una base creada antes de la migración `002_tourism_and_business.sql` se actualiza
+sola con `npm run db:migrate`: las antiguas cuentas de emprendedor pasan a ser
+profesionales (`<usuario>@emprendedores.tucan.bo`) dueños de sus mismas tiendas.
 
 La app Flutter se apunta a esta API al compilar:
 
@@ -65,7 +69,8 @@ src/
     users/               registro, ingreso, perfil, perfiles públicos
     cv/                  hoja de vida y enlace público
     opportunities/       tablero, postulaciones, guardados, reclutamiento
-    stores/              cuentas de emprendedor y tiendas
+    stores/              emprendimientos (tiendas) de los profesionales
+    business/            rubros, perfil de negocio, ofertas, promociones, consultas y búsqueda turística
     community/           publicaciones, reacciones, comentarios
     directory/           directorio laboral e importador del Excel
     ai/                  proxy a OpenAI
@@ -79,7 +84,9 @@ test/                    pruebas de integración contra SQL Server real
 Todas las rutas cuelgan de `/api`. Las respuestas de error son
 `{ "error": "mensaje para mostrar" }`. 🔒 = requiere `Authorization: Bearer <token>`.
 
-**Cuentas** (personas: profesional `seeker`, empresa `employer`, quien busca servicios `serviceSeeker`)
+**Cuentas**: profesional o técnico `seeker` (también es quien tiene emprendimientos), empresa
+`employer` (se registra con `businessSector` y `businessType`), turista `tourist` y quien busca un
+técnico `serviceSeeker`.
 
 | Método      | Ruta              |                                                                  |
 | ----------- | ----------------- | ---------------------------------------------------------------- |
@@ -107,19 +114,38 @@ Todas las rutas cuelgan de `/api`. Las respuestas de error son
 | PATCH              | `/employer/applicants/:id` 🔒             | `{ status }`                       |
 | POST               | `/employer/applicants/:id/notes` 🔒       | `{ text }`                         |
 
-**Emprendimientos** (cuentas con usuario, no correo; varias tiendas por cuenta)
+**Emprendimientos** (de un profesional; no hay cuentas aparte de emprendedor)
 
-| Método              | Ruta                            |                                 |
-| ------------------- | ------------------------------- | ------------------------------- |
-| GET                 | `/stores`, `/stores/:slug`      | Tiendas públicas                |
-| POST                | `/owners/register`              | `{ username, password, store }` |
-| POST                | `/owners/login`, `/owners/demo` | Sesión de emprendedor           |
-| GET                 | `/owners/me` 🔒                 | Cuenta y sus tiendas            |
-| POST / PUT / DELETE | `/owners/me/stores[/:id]` 🔒    | Gestionar tiendas propias       |
+| Método              | Ruta                       |                                         |
+| ------------------- | -------------------------- | --------------------------------------- |
+| GET                 | `/stores`, `/stores/:slug` | Tiendas públicas                        |
+| GET                 | `/me/stores` 🔒            | Mis emprendimientos                     |
+| POST / PUT / DELETE | `/me/stores[/:id]` 🔒      | Crear (solo `seeker`) y editar los míos |
+
+**Negocios y turismo**. El rubro decide cómo se ve la página y qué se publica: hospedaje →
+habitaciones (`room`), turismo (agencias, operadores, guías, transporte) → paquetes (`package`),
+gastronomía → platos (`dish`), el resto → servicios (`service`). Los profesionales publican
+talleres (`workshop`), tours (`tour`) o servicios. Lo que ofrece una cadena hotelera vale en todas
+sus sedes (`attributes.branches`).
+
+| Método                    | Ruta                                          |                                                                                  |
+| ------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------- |
+| GET                       | `/catalog/business-sectors`                   | Rubros y tipos de empresa                                                        |
+| GET                       | `/businesses?sector=&department=&q=`          | Negocios (con sedes)                                                             |
+| GET                       | `/businesses/:id`                             | Negocio, lo que ofrece y sus promociones                                         |
+| GET                       | `/offerings?ownerId=&kind=`                   | Ofertas públicas                                                                 |
+| GET                       | `/promotions`                                 | Promociones vigentes                                                             |
+| GET                       | `/explore?category=&department=&province=&q=` | Búsqueda del turista: negocios, ofertas, guías y artesanos, promociones, tiendas |
+| GET / PUT                 | `/me/business` 🔒                             | Perfil del negocio (empresa)                                                     |
+| GET / POST / PUT / DELETE | `/me/offerings[/:id]` 🔒                      | Ofertas propias (el tipo depende del rubro)                                      |
+| GET / POST / PUT / DELETE | `/me/promotions[/:id]` 🔒                     | Promociones (un profesional puede atarlas a su tienda)                           |
+| POST                      | `/inquiries` 🔒                               | Consulta a una empresa o profesional (fecha, personas, WhatsApp)                 |
+| GET                       | `/me/inquiries?box=sent\|received` 🔒         | Consultas enviadas o recibidas                                                   |
+| PATCH                     | `/me/inquiries/:id` 🔒                        | Responder o cerrar (solo quien la recibió)                                       |
 
 **Comunidad**: `GET /posts` · `POST /posts` 🔒 · `PATCH/DELETE /posts/:id` 🔒 ·
-`POST /posts/:id/likes` 🔒 (alterna) · `POST /posts/:id/comments` 🔒. Un emprendedor
-publica como una de sus tiendas enviando `asStoreId`.
+`POST /posts/:id/likes` 🔒 (alterna) · `POST /posts/:id/comments` 🔒. Un profesional
+publica como uno de sus emprendimientos enviando `asStoreId`.
 
 **Directorio laboral**: `GET /directory/facets` · `GET /directory/companies?q=&department=&sector=&favorites=&page=&pageSize=`
 · `GET/PUT/DELETE /directory/favorites[/:id]` 🔒.

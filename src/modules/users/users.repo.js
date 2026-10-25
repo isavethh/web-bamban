@@ -52,15 +52,21 @@ export function toProfile(row, { includePrivate = true } = {}) {
     isEmployerVerified: Boolean(row.is_employer_verified),
   };
   for (const f of DETAIL_FIELDS) profile[f] = details[f] ?? null;
+  // Rubro y tipo de la empresa (vienen de business_profiles).
+  profile.businessSector = row.business_sector ?? null;
+  profile.businessType = row.business_type ?? null;
   if (!includePrivate) delete profile.taxId;
   return profile;
 }
 
-export const findById = (id, executor) =>
-  one('SELECT * FROM users WHERE id = @id', { id }, executor);
+const USER_SELECT = `
+  SELECT u.*, b.sector AS business_sector, b.business_type
+  FROM users u LEFT JOIN business_profiles b ON b.user_id = u.id`;
+
+export const findById = (id, executor) => one(`${USER_SELECT} WHERE u.id = @id`, { id }, executor);
 
 export const findByEmail = (email, executor) =>
-  one('SELECT * FROM users WHERE email = @email', { email }, executor);
+  one(`${USER_SELECT} WHERE u.email = @email`, { email }, executor);
 
 export async function insertUser(user, executor) {
   await query(
@@ -140,8 +146,8 @@ export const updatePassword = (id, passwordHash) =>
 
 export const listPublic = (role) =>
   rows(
-    `SELECT * FROM users
-     WHERE is_profile_public = 1 AND (@role IS NULL OR role = @role)
-     ORDER BY rating DESC, name`,
+    `${USER_SELECT}
+     WHERE u.is_profile_public = 1 AND (@role IS NULL OR u.role = @role)
+     ORDER BY u.rating DESC, u.name`,
     { role: role ?? null },
   );

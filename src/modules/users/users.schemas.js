@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
-export const ROLES = ['seeker', 'serviceSeeker', 'employer'];
+import { isValidType } from '../business/catalog.js';
+
+export const ROLES = ['seeker', 'serviceSeeker', 'employer', 'tourist'];
 
 const text = (max) => z.string().trim().max(max);
 const optionalText = (max) => text(max).nullish();
@@ -37,13 +39,33 @@ export const profileFields = {
   taxId: optionalText(30),
 };
 
-export const registerBody = z.object({
-  ...profileFields,
-  email,
-  password,
-  role: z.enum(ROLES),
-  isProfilePublic: profileFields.isProfilePublic.optional(),
-});
+export const registerBody = z
+  .object({
+    ...profileFields,
+    email,
+    password,
+    role: z.enum(ROLES),
+    isProfilePublic: profileFields.isProfilePublic.optional(),
+    // Solo empresas: rubro y tipo (ver business/catalog.js).
+    businessSector: z.string().max(40).nullish(),
+    businessType: z.string().max(40).nullish(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.role !== 'employer') return;
+    if (!data.businessSector || !data.businessType) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['businessSector'],
+        message: 'Elige el rubro de la empresa.',
+      });
+    } else if (!isValidType(data.businessSector, data.businessType)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['businessType'],
+        message: 'El tipo no corresponde al rubro.',
+      });
+    }
+  });
 
 export const loginBody = z.object({ email, password: z.string().min(1).max(128) });
 

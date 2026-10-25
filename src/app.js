@@ -14,7 +14,16 @@ import {
   myOpportunitiesRouter,
   opportunitiesRouter,
 } from './modules/opportunities/opportunities.routes.js';
-import { ownersRouter, storesRouter } from './modules/stores/stores.routes.js';
+import { myStoresRouter, storesRouter } from './modules/stores/stores.routes.js';
+import {
+  businessesRouter,
+  catalogRouter,
+  exploreRouter,
+  inquiriesRouter,
+  myBusinessRouter,
+  offeringsRouter,
+  promotionsRouter,
+} from './modules/business/business.routes.js';
 import { postsRouter } from './modules/community/community.routes.js';
 import { directoryRouter } from './modules/directory/directory.routes.js';
 import { aiRouter, legacyAiRouter } from './modules/ai/ai.routes.js';
@@ -54,13 +63,20 @@ export function createApp() {
   api.use('/auth', authRouter);
   api.use('/me', meRouter);
   api.use('/me/cv', myCvRouter);
+  api.use('/me/stores', myStoresRouter);
   api.use('/me', myOpportunitiesRouter);
+  api.use('/me', myBusinessRouter);
   api.use('/profiles', profilesRouter);
   api.use('/cvs', publicCvRouter);
   api.use('/opportunities', opportunitiesRouter);
   api.use('/employer', employerRouter);
   api.use('/stores', storesRouter);
-  api.use('/owners', ownersRouter);
+  api.use('/catalog', catalogRouter);
+  api.use('/businesses', businessesRouter);
+  api.use('/offerings', offeringsRouter);
+  api.use('/promotions', promotionsRouter);
+  api.use('/inquiries', inquiriesRouter);
+  api.use('/explore', exploreRouter);
   api.use('/posts', postsRouter);
   api.use('/directory', directoryRouter);
   api.use('/ai', aiRouter);
