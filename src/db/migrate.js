@@ -14,6 +14,12 @@ export function splitBatches(script) {
     .filter(Boolean);
 }
 
+/** La primera línea con código de un lote, para ubicar el error. */
+function firstStatement(batch) {
+  const line = batch.split('\n').find((l) => l.trim() && !l.trim().startsWith('--')) ?? '';
+  return line.trim().slice(0, 120);
+}
+
 /**
  * Crea la base de datos si no existe (conectándose a `master`).
  *
@@ -58,16 +64,24 @@ export async function migrate({ log = console.log, pool: target, until } = {}) {
     const script = await readFile(path.join(migrationsDir, file), 'utf8');
     const tx = new sql.Transaction(pool);
     await tx.begin();
+    let current = '';
     try {
-      for (const batch of splitBatches(script)) await new sql.Request(tx).query(batch);
+      for (const batch of splitBatches(script)) {
+        current = batch;
+        await new sql.Request(tx).query(batch);
+      }
+      current = '';
       await new sql.Request(tx)
         .input('name', file)
         .query('INSERT INTO schema_migrations (name) VALUES (@name)');
       await tx.commit();
       log(`migración aplicada: ${file}`);
     } catch (err) {
-      await tx.rollback();
-      throw new Error(`Falló la migración ${file}: ${err.message}`, { cause: err });
+      // Si SQL Server ya anuló la transacción, rollback() también falla
+      // («Transaction has been aborted») y taparía el error que importa.
+      await tx.rollback().catch(() => {});
+      const where = current ? `\n  en: ${firstStatement(current)}` : '';
+      throw new Error(`Falló la migración ${file}: ${err.message}${where}`, { cause: err });
     }
     if (file === until) break;
   }
