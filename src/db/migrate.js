@@ -14,14 +14,28 @@ export function splitBatches(script) {
     .filter(Boolean);
 }
 
-/** Crea la base de datos si no existe (conectándose a `master`). */
-export async function ensureDatabase(name = env.DB_NAME) {
+/** La primera línea con código de un lote, para ubicar el error. */
+function firstStatement(batch) {
+  const line = batch.split('\n').find((l) => l.trim() && !l.trim().startsWith('--')) ?? '';
+  return line.trim().slice(0, 120);
+}
+
+/**
+ * Crea la base de datos si no existe (conectándose a `master`).
+ *
+ * En hostings compartidos (Somee, Azure SQL) el usuario no puede entrar a
+ * `master`, pero la base ya la crea el proveedor: entonces se sigue con ella.
+ */
+export async function ensureDatabase(name = env.DB_NAME, { log = console.log } = {}) {
   if (!/^[A-Za-z0-9_]+$/.test(name)) throw new Error(`Nombre de base de datos inválido: ${name}`);
-  const master = await new sql.ConnectionPool(connectionConfig('master')).connect();
+  let master;
   try {
+    master = await new sql.ConnectionPool(connectionConfig('master')).connect();
     await master.request().query(`IF DB_ID(N'${name}') IS NULL CREATE DATABASE [${name}]`);
+  } catch (err) {
+    log(`No se pudo crear la base desde master (${err.message}); se usa la existente: ${name}`);
   } finally {
-    await master.close();
+    await master?.close();
   }
 }
 
@@ -50,16 +64,24 @@ export async function migrate({ log = console.log, pool: target, until } = {}) {
     const script = await readFile(path.join(migrationsDir, file), 'utf8');
     const tx = new sql.Transaction(pool);
     await tx.begin();
+    let current = '';
     try {
-      for (const batch of splitBatches(script)) await new sql.Request(tx).query(batch);
+      for (const batch of splitBatches(script)) {
+        current = batch;
+        await new sql.Request(tx).query(batch);
+      }
+      current = '';
       await new sql.Request(tx)
         .input('name', file)
         .query('INSERT INTO schema_migrations (name) VALUES (@name)');
       await tx.commit();
       log(`migración aplicada: ${file}`);
     } catch (err) {
-      await tx.rollback();
-      throw new Error(`Falló la migración ${file}: ${err.message}`, { cause: err });
+      // Si SQL Server ya anuló la transacción, rollback() también falla
+      // («Transaction has been aborted») y taparía el error que importa.
+      await tx.rollback().catch(() => {});
+      const where = current ? `\n  en: ${firstStatement(current)}` : '';
+      throw new Error(`Falló la migración ${file}: ${err.message}${where}`, { cause: err });
     }
     if (file === until) break;
   }
