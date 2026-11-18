@@ -29,14 +29,33 @@ function firstStatement(batch) {
 export async function ensureDatabase(name = env.DB_NAME, { log = console.log } = {}) {
   if (!/^[A-Za-z0-9_]+$/.test(name)) throw new Error(`Nombre de base de datos inválido: ${name}`);
   let master;
+  let masterOk = false;
   try {
     master = await new sql.ConnectionPool(connectionConfig('master')).connect();
+    masterOk = true;
     await master.request().query(`IF DB_ID(N'${name}') IS NULL CREATE DATABASE [${name}]`);
   } catch (err) {
     log(`No se pudo crear la base desde master (${err.message}); se usa la existente: ${name}`);
   } finally {
     await master?.close();
   }
+  // Sirve para explicar un «Login failed» posterior: si se pudo entrar a
+  // master, el usuario y la contraseña son válidos.
+  return { masterOk };
+}
+
+/**
+ * Explica un fallo de ingreso a la base. SQL Server responde «Login failed
+ * for user» tanto si la contraseña está mal como si el usuario no puede
+ * abrir esa base, así que el mensaje solo no dice qué variable revisar.
+ */
+export function explainLoginError(err, { masterOk }) {
+  if (err?.code !== 'ELOGIN') return null;
+  const where = `la base «${env.DB_NAME}» en ${env.DB_SERVER} con el usuario ${env.DB_USER}`;
+  return masterOk
+    ? `No se pudo abrir ${where}. El usuario y la contraseña son válidos (se pudo entrar a master), ` +
+        'así que revisa DB_NAME: debe ser el nombre exacto de la base y ese usuario debe tener acceso a ella.'
+    : `No se pudo entrar a ${where}. Revisa DB_USER y DB_PASSWORD; si son correctos, revisa DB_NAME.`;
 }
 
 /**
