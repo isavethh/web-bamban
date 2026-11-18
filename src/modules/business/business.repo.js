@@ -4,17 +4,20 @@ import { sectorById } from './catalog.js';
 
 const iso = (d) => (d ? new Date(d).toISOString() : null);
 const dateOnly = (d) => (d ? new Date(d).toISOString().slice(0, 10) : null);
-const json = (v, fallback) => [sql.NVarChar(sql.MAX), JSON.stringify(v ?? fallback)];
+// Las fechas sin hora viajan como 'AAAA-MM-DD': un Date dependería de la
+// zona horaria del servidor.
+const dateParam = (d) => [sql.Date, dateOnly(d)];
+const json = (v, fallback) => [sql.Text, JSON.stringify(v ?? fallback)];
 
 // --- Perfil de negocio -------------------------------------------------------
 
 const BUSINESS_SELECT = `
   SELECT b.*, u.name AS owner_name, u.company_name, u.rating, u.is_employer_verified,
          u.photo AS logo,
-         (SELECT COUNT(*) FROM offerings o WHERE o.owner_user_id = b.user_id AND o.is_active = 1)
+         (SELECT COUNT(*) FROM offerings o WHERE o.owner_user_id = b.user_id AND o.is_active)
            AS offerings_count,
          (SELECT MIN(o.price_amount) FROM offerings o
-           WHERE o.owner_user_id = b.user_id AND o.is_active = 1) AS price_from
+           WHERE o.owner_user_id = b.user_id AND o.is_active) AS price_from
   FROM business_profiles b JOIN users u ON u.id = b.user_id`;
 
 export function toBusiness(r) {
@@ -53,8 +56,8 @@ export const listBusinesses = ({ sector, businessType } = {}) =>
     `${BUSINESS_SELECT}
      WHERE (@sector IS NULL OR b.sector = @sector)
        AND (@type IS NULL OR b.business_type = @type)
-     ORDER BY u.rating DESC, u.company_name`,
-    { sector: sector ?? null, type: businessType ?? null },
+     ORDER BY u.rating DESC NULLS LAST, u.company_name`,
+    { sector: [sql.Text, sector ?? null], type: [sql.Text, businessType ?? null] },
   );
 
 const BUSINESS_COLUMNS = {
@@ -83,9 +86,9 @@ export async function upsertBusiness(userId, data, executor) {
       k === 'attributes'
         ? json(data[k], {})
         : k === 'coverImage'
-          ? [sql.NVarChar(sql.MAX), data[k]]
+          ? [sql.Text, data[k]]
           : k === 'description'
-            ? [sql.NVarChar(3000), data[k]]
+            ? [sql.Text, data[k]]
             : data[k];
   }
   const exists = await one(
@@ -98,7 +101,7 @@ export async function upsertBusiness(userId, data, executor) {
     await query(
       `UPDATE business_profiles
        SET ${present.map((k) => `${BUSINESS_COLUMNS[k]} = @${k}`).join(', ')},
-           updated_at = SYSUTCDATETIME()
+           updated_at = now()
        WHERE user_id = @userId`,
       params,
       executor,
@@ -158,13 +161,13 @@ export const listOfferings = ({ ownerId, kinds, activeOnly = true } = {}) =>
   rows(
     `${OFFERING_SELECT}
      WHERE (@ownerId IS NULL OR o.owner_user_id = @ownerId)
-       AND (@kinds IS NULL OR o.kind IN (SELECT value FROM OPENJSON(@kinds)))
-       AND (@activeOnly = 0 OR o.is_active = 1)
+       AND (@kinds IS NULL OR o.kind IN (SELECT json_array_elements_text(@kinds::json)))
+       AND (NOT @activeOnly OR o.is_active)
      ORDER BY o.sort_order, o.created_at`,
     {
-      ownerId: ownerId ?? null,
-      kinds: [sql.NVarChar(sql.MAX), kinds ? JSON.stringify(kinds) : null],
-      activeOnly: [sql.Bit, activeOnly],
+      ownerId: [sql.Text, ownerId ?? null],
+      kinds: [sql.Text, kinds ? JSON.stringify(kinds) : null],
+      activeOnly: [sql.Bool, activeOnly],
     },
   );
 
@@ -194,13 +197,13 @@ function offeringParams(data) {
       k === 'details'
         ? json(data[k], {})
         : k === 'image'
-          ? [sql.NVarChar(sql.MAX), data[k]]
+          ? [sql.Text, data[k]]
           : k === 'description'
-            ? [sql.NVarChar(3000), data[k]]
+            ? [sql.Text, data[k]]
             : k === 'priceAmount'
-              ? [sql.Decimal(12, 2), data[k]]
+              ? [sql.Numeric, data[k]]
               : k === 'isActive'
-                ? [sql.Bit, data[k]]
+                ? [sql.Bool, data[k]]
                 : k === 'capacity' || k === 'sortOrder'
                   ? [sql.Int, data[k]]
                   : data[k];
@@ -264,10 +267,10 @@ export const listPromotions = ({ ownerId, activeOnly = true } = {}) =>
   rows(
     `${PROMOTION_SELECT}
      WHERE (@ownerId IS NULL OR p.owner_user_id = @ownerId)
-       AND (@activeOnly = 0 OR p.valid_until IS NULL
-            OR p.valid_until >= CAST(SYSUTCDATETIME() AS DATE))
+       AND (NOT @activeOnly OR p.valid_until IS NULL
+            OR p.valid_until >= (now() AT TIME ZONE 'UTC')::date)
      ORDER BY p.created_at DESC`,
-    { ownerId: ownerId ?? null, activeOnly: [sql.Bit, activeOnly] },
+    { ownerId: [sql.Text, ownerId ?? null], activeOnly: [sql.Bool, activeOnly] },
   );
 
 const PROMOTION_COLUMNS = {
@@ -288,11 +291,11 @@ function promotionParams(data) {
     if (data[k] === undefined) continue;
     out[k] =
       k === 'validUntil'
-        ? [sql.Date, data[k] ? new Date(data[k]) : null]
+        ? dateParam(data[k])
         : k === 'image'
-          ? [sql.NVarChar(sql.MAX), data[k]]
+          ? [sql.Text, data[k]]
           : k === 'description'
-            ? [sql.NVarChar(2000), data[k]]
+            ? [sql.Text, data[k]]
             : data[k];
   }
   return out;
@@ -356,20 +359,20 @@ export async function insertInquiry(i, executor) {
     `INSERT INTO inquiries (id, from_user_id, to_user_id, offering_id, message, travel_date,
        people, contact_phone, status, reply, replied_at, created_at)
      VALUES (@id, @fromUserId, @toUserId, @offeringId, @message, @travelDate, @people,
-       @contactPhone, @status, @reply, @repliedAt, COALESCE(@createdAt, SYSUTCDATETIME()))`,
+       @contactPhone, @status, @reply, @repliedAt, COALESCE(@createdAt, now()))`,
     {
       id: i.id,
       fromUserId: i.fromUserId,
       toUserId: i.toUserId,
       offeringId: i.offeringId ?? null,
-      message: [sql.NVarChar(2000), i.message],
-      travelDate: [sql.Date, i.travelDate ? new Date(i.travelDate) : null],
+      message: [sql.Text, i.message],
+      travelDate: dateParam(i.travelDate),
       people: [sql.Int, i.people ?? null],
       contactPhone: i.contactPhone ?? null,
       status: i.status ?? 'nueva',
-      reply: [sql.NVarChar(2000), i.reply ?? null],
-      repliedAt: [sql.DateTime2(3), i.repliedAt ? new Date(i.repliedAt) : null],
-      createdAt: [sql.DateTime2(3), i.createdAt ? new Date(i.createdAt) : null],
+      reply: [sql.Text, i.reply ?? null],
+      repliedAt: [sql.Timestamp, i.repliedAt ? new Date(i.repliedAt) : null],
+      createdAt: [sql.Timestamp, i.createdAt ? new Date(i.createdAt) : null],
     },
     executor,
   );

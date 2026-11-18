@@ -1,48 +1,42 @@
 import { after, before, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { closePool } from './helpers.js';
-import { connectionConfig, sql } from '../src/db/pool.js';
+import { compile, getPool } from '../src/db/pool.js';
 import { migrate } from '../src/db/migrate.js';
 
-const NAME = 'tucan_migration_test';
-let pool;
-
 before(async () => {
-  const master = await new sql.ConnectionPool(connectionConfig('master')).connect();
-  await master.request().query(`
-    IF DB_ID(N'${NAME}') IS NOT NULL
-    BEGIN
-      ALTER DATABASE [${NAME}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-      DROP DATABASE [${NAME}];
-    END
-    CREATE DATABASE [${NAME}];`);
-  await master.close();
-  pool = await new sql.ConnectionPool(connectionConfig(NAME)).connect();
+  await migrate({ log: () => {} });
 });
 
-after(async () => {
-  await pool?.close();
-  await closePool();
+after(closePool);
+
+test('migrar dos veces no vuelve a aplicar nada', async () => {
+  const applied = [];
+  await migrate({ log: (line) => applied.push(line) });
+  assert.deepEqual(applied, []);
+  const { rows } = await getPool().query('SELECT name FROM schema_migrations ORDER BY name');
+  assert.equal(rows[0].name, '001_initial_schema.sql');
 });
 
-test('la 002 convierte las cuentas de emprendedor en profesionales sin perder tiendas', async () => {
-  await migrate({ pool, log: () => {}, until: '001_initial_schema.sql' });
-  await pool.request().query(`
-    INSERT INTO store_owners (id, username, password_hash, display_name)
-      VALUES ('o1', 'marta', 'hash', 'Marta Rojas');
-    INSERT INTO stores (id, owner_id, name, slug, category, city)
-      VALUES ('s1', 'o1', 'Tortas Marta', 'tortas-marta', 'Repostería', 'Sucre');`);
+test('el esquema rechaza JSON inválido y roles desconocidos', async () => {
+  const insert = (role, details) =>
+    getPool().query(
+      `INSERT INTO users (id, email, password_hash, role, name, details)
+       VALUES ('esquema_1', 'esquema@correo.bo', 'hash', $1, 'Prueba', $2)`,
+      [role, details],
+    );
+  await assert.rejects(insert('seeker', '{no es json'));
+  await assert.rejects(insert('admin', '{}'));
+});
 
-  await migrate({ pool, log: () => {} });
-
-  const user = (await pool.request().query("SELECT * FROM users WHERE id = 'o1'")).recordset[0];
-  assert.equal(user.role, 'seeker');
-  assert.equal(user.name, 'Marta Rojas');
-  assert.equal(user.email, 'marta@emprendedores.tucan.bo');
-  assert.equal(user.password_hash, 'hash', 'conserva la contraseña');
-  assert.equal(user.city, 'Sucre');
-  const store = (await pool.request().query("SELECT * FROM stores WHERE id = 's1'")).recordset[0];
-  assert.equal(store.owner_user_id, 'o1');
-  const owners = await pool.request().query("SELECT OBJECT_ID(N'store_owners') AS t");
-  assert.equal(owners.recordset[0].t, null);
+test('compile convierte @nombre en parámetros numerados y fija tipos', () => {
+  const { text, values } = compile(
+    "SELECT * FROM t WHERE a = @a AND (@b IS NULL OR b = @b) AND c = 'x@correo.bo' AND d = @a",
+    { a: 1, b: ['text', null], sinUsar: 9 },
+  );
+  assert.equal(
+    text,
+    "SELECT * FROM t WHERE a = $1 AND ($2::text IS NULL OR b = $2::text) AND c = 'x@correo.bo' AND d = $1",
+  );
+  assert.deepEqual(values, [1, null]);
 });

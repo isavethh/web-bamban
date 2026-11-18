@@ -1,30 +1,29 @@
-# Entorno local completo: SQL Server + API.
-#   docker compose up -d db          (solo la base de datos)
+# Entorno local completo: PostgreSQL + API.
+#   docker compose up -d db          (solo la base de datos, en el puerto 5433)
 #   docker compose up --build        (base de datos + API en http://localhost:3000)
 services:
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: postgres:16-alpine
     environment:
-      ACCEPT_EULA: 'Y'
-      MSSQL_SA_PASSWORD: ${DB_PASSWORD:?Define DB_PASSWORD en .env}
+      POSTGRES_DB: churapp
+      POSTGRES_PASSWORD: local_dev_pg
     ports:
-      - '1433:1433'
+      - '5433:5432'
     volumes:
-      - mssql-data:/var/opt/mssql
+      - pg-data:/var/lib/postgresql/data
+      # Crea también la base de pruebas la primera vez.
+      - ./scripts/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
     healthcheck:
-      test:
-        [
-          'CMD-SHELL',
-          '/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" || exit 1',
-        ]
-      interval: 10s
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d churapp']
+      interval: 5s
       retries: 10
 
   api:
     build: .
     env_file: .env
     environment:
-      DB_SERVER: db
+      DATABASE_URL: postgresql://postgres:local_dev_pg@db:5432/churapp
+      DB_SSL: 'false'
       NODE_ENV: production
     ports:
       - '3000:3000'
@@ -35,4 +34,4 @@ services:
     command: sh -c "node scripts/migrate.js && node scripts/seed.js && node src/server.js"
 
 volumes:
-  mssql-data:
+  pg-data:

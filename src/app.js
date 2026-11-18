@@ -48,13 +48,13 @@ export function createApp() {
   app.use(express.json({ limit: '8mb' }));
 
   // Sirve para «despertar» la instancia gratuita de Render y para monitoreo.
-  app.get('/', (_req, res) => res.json({ name: 'tucan-api', status: 'ok' }));
+  app.get('/', (_req, res) => res.json({ name: 'churapp-api', status: 'ok' }));
   app.get('/health', async (req, res) => {
     try {
-      await (await getPool()).request().query('SELECT 1');
+      await getPool().query('SELECT 1');
       res.json({ status: 'ok', database: 'ok' });
     } catch (err) {
-      // El motivo (credenciales, cifrado, red) solo va al log, no a la respuesta.
+      // El motivo (credenciales, TLS, red) solo va al log, no a la respuesta.
       (req.log ?? logger).error({ err }, 'no se pudo conectar a la base de datos');
       res.status(503).json({ status: 'degraded', database: 'unreachable' });
     }

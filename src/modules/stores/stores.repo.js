@@ -32,7 +32,7 @@ export function toStore(r) {
 
 const COLUMNS = {
   name: ['name'],
-  description: ['description', () => sql.NVarChar(3000)],
+  description: ['description', () => sql.Text],
   phone: ['phone'],
   department: ['department'],
   province: ['province'],
@@ -40,13 +40,13 @@ const COLUMNS = {
   address: ['address'],
   hours: ['hours'],
   category: ['category'],
-  delivery: ['delivery', () => sql.Bit],
+  delivery: ['delivery', () => sql.Bool],
   ownerName: ['owner_name'],
   instagram: ['instagram'],
-  image1Url: ['image1', () => sql.NVarChar(sql.MAX)],
-  image2Url: ['image2', () => sql.NVarChar(sql.MAX)],
-  tags: ['tags', () => sql.NVarChar(sql.MAX), JSON.stringify],
-  products: ['products', () => sql.NVarChar(sql.MAX), JSON.stringify],
+  image1Url: ['image1', () => sql.Text],
+  image2Url: ['image2', () => sql.Text],
+  tags: ['tags', () => sql.Text, JSON.stringify],
+  products: ['products', () => sql.Text, JSON.stringify],
 };
 
 function params(store) {
@@ -89,16 +89,16 @@ export async function insertStore(store, executor) {
   await query(
     `INSERT INTO stores (id, owner_user_id, slug, rating, reviews_count, created_at,
        ${fields.map((f) => COLUMNS[f][0]).join(', ')})
-     VALUES (@id, @ownerId, @slug, @rating, @reviewsCount, COALESCE(@createdAt, SYSUTCDATETIME()),
+     VALUES (@id, @ownerId, @slug, @rating, @reviewsCount, COALESCE(@createdAt, now()),
        ${fields.map((f) => `@${f}`).join(', ')})`,
     {
       ...p,
       id: store.id,
       ownerId: store.ownerId,
       slug: store.slug,
-      rating: [sql.Decimal(3, 2), store.rating ?? null],
+      rating: [sql.Numeric, store.rating ?? null],
       reviewsCount: [sql.Int, store.reviewsCount ?? 0],
-      createdAt: [sql.DateTime2(3), store.createdAt ? new Date(store.createdAt) : null],
+      createdAt: [sql.Timestamp, store.createdAt ? new Date(store.createdAt) : null],
     },
     executor,
   );
@@ -110,7 +110,7 @@ export async function updateStore(id, changes) {
   if (!fields.length) return;
   await query(
     `UPDATE stores SET ${fields.map((f) => `${COLUMNS[f][0]} = @${f}`).join(', ')},
-       updated_at = SYSUTCDATETIME() WHERE id = @id`,
+       updated_at = now() WHERE id = @id`,
     { ...p, id },
   );
 }

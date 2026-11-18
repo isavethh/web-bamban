@@ -367,7 +367,7 @@ myBusinessRouter.patch(
     await query(
       `UPDATE inquiries SET
          reply = COALESCE(@reply, reply),
-         replied_at = CASE WHEN @reply IS NULL THEN replied_at ELSE SYSUTCDATETIME() END,
+         replied_at = CASE WHEN @reply IS NULL THEN replied_at ELSE now() END,
          status = COALESCE(@status, CASE WHEN @reply IS NULL THEN status ELSE 'respondida' END)
        WHERE id = @id`,
       { id: row.id, reply: reply ?? null, status: status ?? null },

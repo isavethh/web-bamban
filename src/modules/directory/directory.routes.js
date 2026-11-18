@@ -82,7 +82,7 @@ directoryRouter.get(
       one(`SELECT COUNT(*) AS n FROM labor_companies c ${clause}`, params),
       rows(
         `SELECT c.* FROM labor_companies c ${clause}
-         ORDER BY c.name, c.id OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY`,
+         ORDER BY c.name, c.id LIMIT @pageSize OFFSET @offset`,
         { ...params, offset: (page - 1) * pageSize, pageSize },
       ),
     ]);
@@ -113,8 +113,8 @@ favorites.put('/:id', validate({ params: idParam }), async (req, res) => {
   });
   if (!exists) throw notFound('Empresa no encontrada.');
   await query(
-    `IF NOT EXISTS (SELECT 1 FROM labor_favorites WHERE user_id = @u AND company_id = @c)
-       INSERT INTO labor_favorites (user_id, company_id) VALUES (@u, @c)`,
+    `INSERT INTO labor_favorites (user_id, company_id) VALUES (@u, @c)
+     ON CONFLICT DO NOTHING`,
     { u: req.auth.id, c: req.valid.params.id },
   );
   res.status(204).end();

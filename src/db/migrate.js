@@ -1,107 +1,68 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { sql, connectionConfig, getPool } from './pool.js';
-import { env } from '../config/env.js';
+import { getPool } from './pool.js';
 
 const migrationsDir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'migrations');
 
-/** Separa un script en lotes por las líneas `GO`, como hace sqlcmd. */
-export function splitBatches(script) {
-  return script
-    .split(/^\s*GO\s*$/im)
-    .map((b) => b.trim())
-    .filter(Boolean);
-}
-
-/** La primera línea con código de un lote, para ubicar el error. */
-function firstStatement(batch) {
-  const line = batch.split('\n').find((l) => l.trim() && !l.trim().startsWith('--')) ?? '';
-  return line.trim().slice(0, 120);
-}
-
 /**
- * Crea la base de datos si no existe (conectándose a `master`).
- *
- * En hostings compartidos (Somee, Azure SQL) el usuario no puede entrar a
- * `master`, pero la base ya la crea el proveedor: entonces se sigue con ella.
+ * Explica un fallo de conexión con palabras que digan qué revisar. Los
+ * mensajes de PostgreSQL y de la red son correctos pero escuetos.
  */
-export async function ensureDatabase(name = env.DB_NAME, { log = console.log } = {}) {
-  if (!/^[A-Za-z0-9_]+$/.test(name)) throw new Error(`Nombre de base de datos inválido: ${name}`);
-  let master;
-  let masterOk = false;
-  try {
-    master = await new sql.ConnectionPool(connectionConfig('master')).connect();
-    masterOk = true;
-    await master.request().query(`IF DB_ID(N'${name}') IS NULL CREATE DATABASE [${name}]`);
-  } catch (err) {
-    log(`No se pudo crear la base desde master (${err.message}); se usa la existente: ${name}`);
-  } finally {
-    await master?.close();
+export function explainConnectionError(err) {
+  const code = err?.code;
+  if (code === '28P01' || code === '28000') {
+    return 'La base rechazó el usuario o la contraseña. Revisa DATABASE_URL (si la contraseña tiene símbolos como @ o #, deben ir codificados).';
   }
-  // Sirve para explicar un «Login failed» posterior: si se pudo entrar a
-  // master, el usuario y la contraseña son válidos.
-  return { masterOk };
+  if (code === '3D000') {
+    return 'El servidor responde pero esa base no existe. Revisa el nombre al final de DATABASE_URL.';
+  }
+  if (code === 'ENOTFOUND' || code === 'EAI_AGAIN') {
+    return 'No se encontró el servidor de la base. Revisa el host de DATABASE_URL.';
+  }
+  if (code === 'ECONNREFUSED' || code === 'ETIMEDOUT' || /timeout/i.test(err?.message ?? '')) {
+    return 'El servidor de la base no respondió. Puede estar pausado (los planes gratuitos se pausan por inactividad) o el puerto de DATABASE_URL es incorrecto.';
+  }
+  if (/SSL|TLS/i.test(err?.message ?? '')) {
+    return 'Falló el cifrado de la conexión. Los proveedores gestionados necesitan DB_SSL=true; una base local, DB_SSL=false.';
+  }
+  return null;
 }
 
 /**
- * Explica un fallo de ingreso a la base. SQL Server responde «Login failed
- * for user» tanto si la contraseña está mal como si el usuario no puede
- * abrir esa base, así que el mensaje solo no dice qué variable revisar.
+ * Aplica, en orden, las migraciones que aún no estén registradas. Cada
+ * archivo corre en su propia transacción: o entra completo o no entra.
  */
-export function explainLoginError(err, { masterOk }) {
-  if (err?.code !== 'ELOGIN') return null;
-  const where = `la base «${env.DB_NAME}» en ${env.DB_SERVER} con el usuario ${env.DB_USER}`;
-  return masterOk
-    ? `No se pudo abrir ${where}. El usuario y la contraseña son válidos (se pudo entrar a master), ` +
-        'así que revisa DB_NAME: debe ser el nombre exacto de la base y ese usuario debe tener acceso a ella.'
-    : `No se pudo entrar a ${where}. Revisa DB_USER y DB_PASSWORD; si son correctos, revisa DB_NAME.`;
-}
-
-/**
- * Aplica, en orden, las migraciones que aún no estén registradas.
- * `until` se detiene después de esa migración (para probar actualizaciones).
- */
-export async function migrate({ log = console.log, pool: target, until } = {}) {
-  const pool = target ?? (await getPool());
-  await pool.request().query(`
-    IF OBJECT_ID(N'schema_migrations') IS NULL
-      CREATE TABLE schema_migrations (
-        name NVARCHAR(200) NOT NULL PRIMARY KEY,
-        applied_at DATETIME2(3) NOT NULL DEFAULT SYSUTCDATETIME()
-      )`);
+export async function migrate({ log = console.log, pool: target } = {}) {
+  const pool = target ?? getPool();
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS schema_migrations (
+      name VARCHAR(200) NOT NULL PRIMARY KEY,
+      applied_at TIMESTAMPTZ(3) NOT NULL DEFAULT now()
+    )`);
   const applied = new Set(
-    (await pool.request().query('SELECT name FROM schema_migrations')).recordset.map((r) => r.name),
+    (await pool.query('SELECT name FROM schema_migrations')).rows.map((r) => r.name),
   );
   const files = (await readdir(migrationsDir)).filter((f) => f.endsWith('.sql')).sort();
 
   for (const file of files) {
-    if (applied.has(file)) {
-      if (file === until) break;
-      continue;
-    }
+    if (applied.has(file)) continue;
     const script = await readFile(path.join(migrationsDir, file), 'utf8');
-    const tx = new sql.Transaction(pool);
-    await tx.begin();
-    let current = '';
+    const client = await pool.connect();
     try {
-      for (const batch of splitBatches(script)) {
-        current = batch;
-        await new sql.Request(tx).query(batch);
-      }
-      current = '';
-      await new sql.Request(tx)
-        .input('name', file)
-        .query('INSERT INTO schema_migrations (name) VALUES (@name)');
-      await tx.commit();
+      await client.query('BEGIN');
+      await client.query(script);
+      await client.query('INSERT INTO schema_migrations (name) VALUES ($1)', [file]);
+      await client.query('COMMIT');
       log(`migración aplicada: ${file}`);
     } catch (err) {
-      // Si SQL Server ya anuló la transacción, rollback() también falla
-      // («Transaction has been aborted») y taparía el error que importa.
-      await tx.rollback().catch(() => {});
-      const where = current ? `\n  en: ${firstStatement(current)}` : '';
-      throw new Error(`Falló la migración ${file}: ${err.message}${where}`, { cause: err });
+      await client.query('ROLLBACK').catch(() => {});
+      // `position` es el carácter del script donde PostgreSQL encontró el error.
+      const line = err.position ? script.slice(0, Number(err.position)).split('\n').length : null;
+      const where = line ? ` (línea ${line})` : '';
+      throw new Error(`Falló la migración ${file}${where}: ${err.message}`, { cause: err });
+    } finally {
+      client.release();
     }
-    if (file === until) break;
   }
 }

@@ -1,9 +1,14 @@
-// Prepara una base de datos de pruebas real (SQL Server) y la app Express.
+// Prepara una base de datos de pruebas real (PostgreSQL) y la app Express.
 //
-// Usa las variables DB_* del entorno (o de .env.test) con una base aparte,
-// `tucan_test` por defecto, que se vacía al empezar cada archivo de pruebas.
+// Usa TEST_DATABASE_URL (del entorno o de .env.test): una base aparte que se
+// vacía al empezar cada archivo de pruebas. Nunca se usa DATABASE_URL, para
+// no borrar por accidente la base de desarrollo.
 process.env.NODE_ENV = 'test';
-process.env.DB_NAME = process.env.TEST_DB_NAME ?? 'tucan_test';
+if (!process.env.TEST_DATABASE_URL) {
+  throw new Error('Define TEST_DATABASE_URL (por ejemplo en .env.test) para correr las pruebas.');
+}
+process.env.DATABASE_URL = process.env.TEST_DATABASE_URL;
+process.env.DB_SSL ??= 'false';
 process.env.JWT_SECRET ??= 'test-secret-que-solo-sirve-para-las-pruebas-0123456789';
 process.env.DEMO_LOGIN_ENABLED ??= 'true';
 process.env.CORS_ORIGINS ??= 'http://localhost:5173';
@@ -11,7 +16,7 @@ delete process.env.OPENAI_API_KEY;
 
 const { default: request } = await import('supertest');
 const { createApp } = await import('../src/app.js');
-const { ensureDatabase, migrate } = await import('../src/db/migrate.js');
+const { migrate } = await import('../src/db/migrate.js');
 const { closePool, query } = await import('../src/db/pool.js');
 const { seedDemo } = await import('../src/db/seed/seed.js');
 const { loadDirectory } = await import('../src/modules/directory/load-directory.js');
@@ -65,9 +70,8 @@ export const SAMPLE_COMPANIES = [
 
 /** Base vacía + migraciones + datos demo + un directorio pequeño. */
 export async function resetDatabase() {
-  await ensureDatabase(process.env.DB_NAME);
   await migrate({ log: () => {} });
-  for (const t of TABLES) await query(`DELETE FROM ${t}`);
+  await query(`TRUNCATE ${TABLES.join(', ')}`);
   await seedDemo({ log: () => {} });
   await loadDirectory(SAMPLE_COMPANIES);
 }
