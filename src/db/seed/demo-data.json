@@ -790,8 +790,8 @@
     {
       "id": "e1",
       "type": "evento",
-      "title": "Feria de Empleo Tucan 2026",
-      "organization": "Tucan · Cámara de Industria y Comercio (CAINCO)",
+      "title": "Feria de Empleo ChurAPP 2026",
+      "organization": "ChurAPP · Cámara de Industria y Comercio (CAINCO)",
       "publisherType": "organizacion",
       "rubro": "Multisectorial",
       "city": "Santa Cruz de la Sierra",
@@ -1138,7 +1138,7 @@
       "rubro": "Arte y cultura",
       "city": "Todo el país",
       "modality": "Virtual",
-      "description": "Fotografías que retraten oficios y profesiones bolivianas. Las 30 mejores se exponen en la Manzana Uno y en la Feria de Empleo Tucan.",
+      "description": "Fotografías que retraten oficios y profesiones bolivianas. Las 30 mejores se exponen en la Manzana Uno y en la Feria de Empleo ChurAPP.",
       "deadlineInDays": 40,
       "requirements": [
         "Hasta 3 fotografías por participante",
