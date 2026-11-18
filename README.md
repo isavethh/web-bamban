@@ -1,24 +1,24 @@
-# Tucan API
+# ChurAPP API
 
-Backend de **Tucan** (empleo, turismo, comunidad y emprendimientos en Bolivia). La app
+Backend de **ChurAPP** (empleo, turismo, comunidad y emprendimientos en Bolivia). La app
 Flutter vive en el repositorio [`aplicaciondeempleo`](https://github.com/isavethh/aplicaciondeempleo)
 y consume esta API.
 
 - **Node.js 22 + Express 5**, ES modules.
-- **SQL Server** (2019+ o Azure SQL) con el driver `mssql`.
+- **PostgreSQL** (15+; Supabase, Neon o propio) con el driver `pg`.
 - Autenticación con **JWT** y contraseñas con **bcrypt**.
 - Validación de entrada con **zod**, `helmet`, CORS por lista blanca y límites de peticiones.
 - La clave de OpenAI vive **solo** aquí; la app nunca la ve.
 
 ## Puesta en marcha
 
-Requisitos: Node 22 y Docker (o un SQL Server propio).
+Requisitos: Node 22 y Docker (o un PostgreSQL propio).
 
 ```bash
-cp .env.example .env            # completa DB_PASSWORD y JWT_SECRET
-docker compose up -d db         # SQL Server local en el puerto 1433
+cp .env.example .env            # completa JWT_SECRET
+docker compose up -d db         # PostgreSQL local en el puerto 5433
 npm install
-npm run db:migrate              # crea la base y las tablas
+npm run db:migrate              # crea las tablas
 npm run db:seed                 # datos de demostración (idempotente)
 npm run directory:import        # 30.667 empresas del Excel → labor_companies
 npm run dev                     # http://localhost:3000
@@ -27,9 +27,9 @@ npm run dev                     # http://localhost:3000
 Con `docker compose up --build` se levantan la base y la API juntas; la API migra
 y carga los datos demo al arrancar.
 
-Una base creada antes de la migración `002_tourism_and_business.sql` se actualiza
-sola con `npm run db:migrate`: las antiguas cuentas de emprendedor pasan a ser
-profesionales (`<usuario>@emprendedores.tucan.bo`) dueños de sus mismas tiendas.
+En esta carpeta conviene arrancar sin `--watch` si el proyecto está dentro de OneDrive
+(`node --env-file=.env src/server.js`): la sincronización toca los archivos y reinicia
+el servidor a mitad de las peticiones.
 
 La app Flutter se apunta a esta API al compilar:
 
@@ -39,15 +39,16 @@ flutter run -d chrome --dart-define=API_URL=http://localhost:3000/api
 
 ## Variables de entorno
 
-| Variable                                                    | Para qué                                                                                                        |
-| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `DB_SERVER`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` | Conexión a SQL Server.                                                                                          |
-| `DB_ENCRYPT`, `DB_TRUST_SERVER_CERTIFICATE`                 | `true`/`false`. En Azure SQL: cifrado sí, confiar en el certificado no.                                         |
-| `JWT_SECRET`                                                | Mínimo 32 caracteres. Generarlo con `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`. |
-| `JWT_EXPIRES_IN`                                            | Vigencia de la sesión (`7d` por defecto).                                                                       |
-| `CORS_ORIGINS`                                              | Orígenes del frontend separados por comas.                                                                      |
-| `DEMO_LOGIN_ENABLED`                                        | Habilita los botones «Probar como…» (cuentas demo sin contraseña conocida).                                     |
-| `OPENAI_API_KEY`, `OPENAI_MODEL`                            | Búsqueda con IA. Sin clave, responde sugerencias genéricas.                                                     |
+| Variable                         | Para qué                                                                                                        |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `DATABASE_URL`                   | Cadena de conexión de PostgreSQL: `postgresql://usuario:clave@host:5432/base`.                                  |
+| `DB_SSL`                         | `true` (por defecto) con proveedores gestionados; `false` con la base local.                                    |
+| `DB_POOL_MAX`                    | Conexiones simultáneas (`5` por defecto). Los planes gratuitos admiten pocas.                                   |
+| `JWT_SECRET`                     | Mínimo 32 caracteres. Generarlo con `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`. |
+| `JWT_EXPIRES_IN`                 | Vigencia de la sesión (`7d` por defecto).                                                                       |
+| `CORS_ORIGINS`                   | Orígenes del frontend separados por comas.                                                                      |
+| `DEMO_LOGIN_ENABLED`             | Habilita los botones «Probar como…» (cuentas demo sin contraseña conocida).                                     |
+| `OPENAI_API_KEY`, `OPENAI_MODEL` | Búsqueda con IA. Sin clave, responde sugerencias genéricas.                                                     |
 
 La configuración se valida al arrancar: si falta algo, el proceso termina con un
 mensaje que dice qué.
@@ -60,8 +61,8 @@ src/
   server.js              arranque y apagado ordenado
   config/env.js          variables de entorno validadas
   db/
-    pool.js              pool de SQL Server y helpers parametrizados
-    migrate.js           ejecuta migrations/*.sql en orden (separadas por GO)
+    pool.js              pool de PostgreSQL y helpers parametrizados (`@nombre`)
+    migrate.js           ejecuta migrations/*.sql en orden, cada una en su transacción
     migrations/          esquema versionado
     seed/                datos de demostración
   middleware/            auth (JWT), validación, errores, rate limit
@@ -76,7 +77,7 @@ src/
     ai/                  proxy a OpenAI
 scripts/                 migrate, seed, import-directory
 data/                    Excel original del directorio laboral
-test/                    pruebas de integración contra SQL Server real
+test/                    pruebas de integración contra PostgreSQL real
 ```
 
 ## API
@@ -157,23 +158,28 @@ publica como uno de sus emprendimientos enviando `asStoreId`.
 ## Pruebas y calidad
 
 ```bash
-npm test                # integración contra SQL Server (base tucan_test, se vacía)
+npm test                # integración contra PostgreSQL (base churapp_test, se vacía)
 npm run lint
 npm run format:check
 ```
 
-Las pruebas usan las variables `DB_*` del entorno o de `.env.test`. La CI de
-GitHub Actions levanta SQL Server como servicio y corre lint, formato, pruebas y
-`npm audit`.
+Las pruebas usan `TEST_DATABASE_URL` (del entorno o de `.env.test`), nunca
+`DATABASE_URL`, para no vaciar por accidente la base de desarrollo. Con la base de
+`docker compose` es `postgresql://postgres:local_dev_pg@localhost:5433/churapp_test`.
+La CI de GitHub Actions levanta PostgreSQL como servicio y corre lint, formato,
+pruebas y `npm audit`.
 
 ## Despliegue
 
-1. Base de datos: Azure SQL o un SQL Server gestionado. Crear un usuario con
-   permisos sobre la base (no usar `sa` en producción).
-2. API: cualquier servicio que ejecute el `Dockerfile` (Render, Azure App Service,
-   Railway…). Variables: las de la tabla, con `NODE_ENV=production`.
-3. Antes del primer arranque: `npm run db:migrate`, `npm run directory:import` y,
-   si se quiere la demo, `npm run db:seed`.
+1. Base de datos: un PostgreSQL gestionado. Con **Supabase** (plan gratuito, sin
+   tarjeta): crear el proyecto y copiar la cadena **Session pooler** de _Connect_
+   (funciona por IPv4, que es lo que usa Render). El plan gratuito pausa el proyecto
+   tras una semana sin actividad; se reactiva desde su panel.
+2. API: cualquier servicio que ejecute Node o el `Dockerfile` (Render, Railway…).
+   Variables: las de la tabla, con `NODE_ENV=production` y `DB_SSL=true`.
+3. Arranque en Render: `npm run db:migrate && npm run db:seed && npm start`. Ambos
+   pasos son idempotentes. El directorio laboral se carga una vez, desde cualquier
+   máquina, con `npm run directory:import` apuntando `DATABASE_URL` a producción.
 4. En el frontend (Vercel), definir `API_URL=https://<tu-api>/api` y añadir el
    dominio del frontend a `CORS_ORIGINS`.
 

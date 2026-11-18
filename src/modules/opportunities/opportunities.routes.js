@@ -190,8 +190,8 @@ myOpportunitiesRouter.put(
     if (!(await repo.findOpportunity(req.valid.params.id)))
       throw notFound('La oportunidad no existe.');
     await query(
-      `IF NOT EXISTS (SELECT 1 FROM saved_opportunities WHERE user_id = @u AND opportunity_id = @o)
-         INSERT INTO saved_opportunities (user_id, opportunity_id) VALUES (@u, @o)`,
+      `INSERT INTO saved_opportunities (user_id, opportunity_id) VALUES (@u, @o)
+       ON CONFLICT DO NOTHING`,
       { u: req.auth.id, o: req.valid.params.id },
     );
     res.status(204).end();
@@ -262,10 +262,10 @@ employerRouter.patch(
   validate({ params: idParam, body: z.object({ status: z.enum(repo.APPLICATION_STATUSES) }) }),
   async (req, res) => {
     const row = await ownedApplication(req.valid.params.id, req.auth.id);
-    await query(
-      'UPDATE applications SET status = @status, updated_at = SYSUTCDATETIME() WHERE id = @id',
-      { id: row.id, status: req.valid.body.status },
-    );
+    await query('UPDATE applications SET status = @status, updated_at = now() WHERE id = @id', {
+      id: row.id,
+      status: req.valid.body.status,
+    });
     const [applicant] = await withNotes([{ ...row, status: req.valid.body.status }]);
     res.json(applicant);
   },

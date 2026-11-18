@@ -1,4 +1,4 @@
-// Importa el directorio laboral desde el Excel a SQL Server.
+// Importa el directorio laboral desde el Excel a la base de datos.
 //
 //   npm run directory:import
 //   npm run directory:import -- --source otra/ruta.xlsx

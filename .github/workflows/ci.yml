@@ -9,21 +9,19 @@ jobs:
   test:
     runs-on: ubuntu-latest
     services:
-      mssql:
-        image: mcr.microsoft.com/mssql/server:2022-latest
+      postgres:
+        image: postgres:16-alpine
         env:
-          ACCEPT_EULA: 'Y'
-          MSSQL_SA_PASSWORD: Ci_Password_2026!
+          POSTGRES_PASSWORD: ci_password
+          POSTGRES_DB: churapp_test
         ports:
-          - 1433:1433
+          - 5432:5432
         options: >-
-          --health-cmd "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P Ci_Password_2026! -Q 'SELECT 1'"
-          --health-interval 10s --health-retries 10
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-retries 10
     env:
-      DB_SERVER: localhost
-      DB_USER: sa
-      DB_PASSWORD: Ci_Password_2026!
-      DB_TRUST_SERVER_CERTIFICATE: 'true'
+      TEST_DATABASE_URL: postgresql://postgres:ci_password@localhost:5432/churapp_test
+      DB_SSL: 'false'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

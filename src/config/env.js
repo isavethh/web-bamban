@@ -7,13 +7,13 @@ const schema = z.object({
   PORT: z.coerce.number().int().positive().default(3000),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).default('info'),
 
-  DB_SERVER: z.string().min(1).default('localhost'),
-  DB_PORT: z.coerce.number().int().positive().default(1433),
-  DB_NAME: z.string().min(1).default('tucan'),
-  DB_USER: z.string().min(1),
-  DB_PASSWORD: z.string().min(1),
-  DB_ENCRYPT: bool.default(true),
-  DB_TRUST_SERVER_CERTIFICATE: bool.default(false),
+  // Cadena de conexión de PostgreSQL: postgresql://usuario:clave@host:5432/base
+  DATABASE_URL: z
+    .string()
+    .regex(/^postgres(ql)?:\/\//, 'DATABASE_URL debe empezar con postgresql://'),
+  // TLS hacia la base. Los proveedores gestionados lo exigen; en local, false.
+  DB_SSL: bool.default(true),
+  DB_POOL_MAX: z.coerce.number().int().positive().max(50).default(5),
 
   JWT_SECRET: z.string().min(32, 'JWT_SECRET debe tener al menos 32 caracteres'),
   JWT_EXPIRES_IN: z.string().default('7d'),

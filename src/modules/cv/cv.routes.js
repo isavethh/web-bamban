@@ -64,11 +64,10 @@ myCvRouter.put('/', validate({ body: z.object({ cv: cvSchema }) }), async (req, 
   const { cv } = req.valid.body;
   const slug = await freeSlug(slugify(cv.fullName, 'mi-cv'), req.auth.id);
   await query(
-    `MERGE cvs AS t
-     USING (SELECT @userId AS user_id) AS s ON t.user_id = s.user_id
-     WHEN MATCHED THEN UPDATE SET slug = @slug, data = @data, updated_at = SYSUTCDATETIME()
-     WHEN NOT MATCHED THEN INSERT (user_id, slug, data) VALUES (@userId, @slug, @data);`,
-    { userId: req.auth.id, slug, data: [sql.NVarChar(sql.MAX), JSON.stringify(cv)] },
+    `INSERT INTO cvs (user_id, slug, data) VALUES (@userId, @slug, @data)
+     ON CONFLICT (user_id) DO UPDATE
+       SET slug = EXCLUDED.slug, data = EXCLUDED.data, updated_at = now()`,
+    { userId: req.auth.id, slug, data: [sql.Text, JSON.stringify(cv)] },
   );
   res.json({ slug, cv });
 });
@@ -78,7 +77,7 @@ export const publicCvRouter = Router();
 publicCvRouter.get('/:slug', async (req, res) => {
   const row = await one(
     `SELECT c.slug, c.data FROM cvs c JOIN users u ON u.id = c.user_id
-     WHERE c.slug = @slug AND u.is_profile_public = 1`,
+     WHERE c.slug = @slug AND u.is_profile_public`,
     { slug: req.params.slug },
   );
   if (!row) throw notFound('Esta hoja de vida no existe o no es pública.');

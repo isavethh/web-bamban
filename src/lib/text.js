@@ -18,7 +18,7 @@ export function searchText(value) {
 export const searchWords = (q) => searchText(q).split(/\s+/).filter(Boolean);
 
 /** Escapa los comodines de LIKE para buscar el texto literal. */
-export const likeEscape = (s) => s.replace(/[[\]%_]/g, (c) => `[${c}]`);
+export const likeEscape = (s) => s.replace(/[\\%_]/g, (c) => `\\${c}`);
 
 /** «Tortas y Empanadas Marta» → «tortas-y-empanadas-marta». */
 export function slugify(value, fallback) {

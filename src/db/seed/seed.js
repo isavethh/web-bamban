@@ -119,8 +119,8 @@ export async function seedDemo({ log = console.log } = {}) {
           id,
           userId: maria.id,
           ...w,
-          rating: [sql.Decimal(3, 2), w.rating],
-          skills: [sql.NVarChar(sql.MAX), JSON.stringify(w.skills ?? [])],
+          rating: [sql.Numeric, w.rating],
+          skills: [sql.Text, JSON.stringify(w.skills ?? [])],
         },
         tx,
       );
@@ -129,8 +129,8 @@ export async function seedDemo({ log = console.log } = {}) {
 
     for (const opportunityId of data.savedOpportunityIds) {
       await query(
-        `IF NOT EXISTS (SELECT 1 FROM saved_opportunities WHERE user_id = @u AND opportunity_id = @o)
-           INSERT INTO saved_opportunities (user_id, opportunity_id) VALUES (@u, @o)`,
+        `INSERT INTO saved_opportunities (user_id, opportunity_id) VALUES (@u, @o)
+         ON CONFLICT DO NOTHING`,
         { u: maria.id, o: opportunityId },
         tx,
       );
@@ -317,7 +317,7 @@ export async function seedDemo({ log = console.log } = {}) {
             id: c.id ?? newId(),
             postId: p.id,
             authorId: c.author.id,
-            author: [sql.NVarChar(sql.MAX), JSON.stringify(c.author)],
+            author: [sql.Text, JSON.stringify(c.author)],
             body: c.body,
           },
           tx,

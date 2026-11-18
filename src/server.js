@@ -4,7 +4,7 @@ import { logger } from './lib/logger.js';
 import { closePool } from './db/pool.js';
 
 const server = createApp().listen(env.PORT, () => {
-  logger.info(`tucan-api escuchando en el puerto ${env.PORT} (${env.NODE_ENV})`);
+  logger.info(`churapp-api escuchando en el puerto ${env.PORT} (${env.NODE_ENV})`);
 });
 
 // Apagado ordenado: deja terminar las peticiones en curso y cierra el pool.

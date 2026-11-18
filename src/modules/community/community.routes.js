@@ -60,12 +60,12 @@ async function actor(req, asStoreId) {
 
 async function loadPosts(where = '', params = {}) {
   const posts = await rows(
-    `SELECT TOP (200) * FROM posts ${where} ORDER BY created_at DESC`,
+    `SELECT * FROM posts ${where} ORDER BY created_at DESC LIMIT 200`,
     params,
   );
   if (!posts.length) return [];
-  const ids = { ids: [sql.NVarChar(sql.MAX), JSON.stringify(posts.map((p) => p.id))] };
-  const inIds = 'IN (SELECT value FROM OPENJSON(@ids))';
+  const ids = { ids: [sql.Text, JSON.stringify(posts.map((p) => p.id))] };
+  const inIds = 'IN (SELECT json_array_elements_text(@ids::json))';
   const [likes, comments] = await Promise.all([
     rows(`SELECT post_id, actor_id FROM post_likes WHERE post_id ${inIds}`, ids),
     rows(`SELECT * FROM post_comments WHERE post_id ${inIds} ORDER BY created_at`, ids),
@@ -97,14 +97,14 @@ async function loadPost(id) {
 export async function insertPost(p, executor) {
   await query(
     `INSERT INTO posts (id, author_id, author, kind, body, created_at)
-     VALUES (@id, @authorId, @author, @kind, @body, COALESCE(@createdAt, SYSUTCDATETIME()))`,
+     VALUES (@id, @authorId, @author, @kind, @body, COALESCE(@createdAt, now()))`,
     {
       id: p.id,
       authorId: p.author.id,
-      author: [sql.NVarChar(sql.MAX), JSON.stringify(p.author)],
+      author: [sql.Text, JSON.stringify(p.author)],
       kind: p.kind,
-      body: [sql.NVarChar(3000), p.body],
-      createdAt: [sql.DateTime2(3), p.createdAt ? new Date(p.createdAt) : null],
+      body: [sql.Text, p.body],
+      createdAt: [sql.Timestamp, p.createdAt ? new Date(p.createdAt) : null],
     },
     executor,
   );
@@ -144,9 +144,9 @@ postsRouter.patch(
   async (req, res) => {
     const { me, post } = await ownPost(req, req.valid.body.asStoreId);
     if (post.author_id !== me.id) throw forbidden('Solo puedes editar tus publicaciones.');
-    await query('UPDATE posts SET body = @body, updated_at = SYSUTCDATETIME() WHERE id = @id', {
+    await query('UPDATE posts SET body = @body, updated_at = now() WHERE id = @id', {
       id: post.id,
-      body: [sql.NVarChar(3000), req.valid.body.body],
+      body: [sql.Text, req.valid.body.body],
     });
     res.json(await loadPost(post.id));
   },
@@ -172,10 +172,11 @@ postsRouter.post(
     const { me, post } = await ownPost(req, req.valid.body.asStoreId);
     // Alterna: si ya reaccionó se quita, si no se agrega.
     await query(
-      `IF EXISTS (SELECT 1 FROM post_likes WHERE post_id = @p AND actor_id = @a)
-         DELETE FROM post_likes WHERE post_id = @p AND actor_id = @a
-       ELSE
-         INSERT INTO post_likes (post_id, actor_id) VALUES (@p, @a)`,
+      `WITH removed AS (
+         DELETE FROM post_likes WHERE post_id = @p AND actor_id = @a RETURNING 1
+       )
+       INSERT INTO post_likes (post_id, actor_id)
+       SELECT @p, @a WHERE NOT EXISTS (SELECT 1 FROM removed)`,
       { p: post.id, a: me.id },
     );
     res.json(await loadPost(post.id));
@@ -195,8 +196,8 @@ postsRouter.post(
         id: newId(),
         postId: post.id,
         authorId: me.id,
-        author: [sql.NVarChar(sql.MAX), JSON.stringify(me)],
-        body: [sql.NVarChar(1000), req.valid.body.body],
+        author: [sql.Text, JSON.stringify(me)],
+        body: [sql.Text, req.valid.body.body],
       },
     );
     res.status(201).json(await loadPost(post.id));

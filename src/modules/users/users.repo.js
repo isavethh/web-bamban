@@ -86,17 +86,17 @@ export async function insertUser(user, executor) {
       city: user.city ?? null,
       department: user.department ?? null,
       province: user.province ?? null,
-      photo: [sql.NVarChar(sql.MAX), user.photoBase64 ?? null],
+      photo: [sql.Text, user.photoBase64 ?? null],
       career: user.career ?? null,
       specialty: user.specialty ?? null,
       summary: user.summary ?? null,
       companyName: user.companyName ?? null,
       taxId: user.taxId ?? null,
-      verified: [sql.Bit, Boolean(user.isEmployerVerified)],
-      isPublic: [sql.Bit, user.isProfilePublic ?? true],
-      rating: [sql.Decimal(3, 2), user.rating ?? null],
-      details: [sql.NVarChar(sql.MAX), JSON.stringify(pickDetails(user))],
-      isDemo: [sql.Bit, Boolean(user.isDemo)],
+      verified: [sql.Bool, Boolean(user.isEmployerVerified)],
+      isPublic: [sql.Bool, user.isProfilePublic ?? true],
+      rating: [sql.Numeric, user.rating ?? null],
+      details: [sql.Text, JSON.stringify(pickDetails(user))],
+      isDemo: [sql.Bool, Boolean(user.isDemo)],
     },
     executor,
   );
@@ -119,35 +119,35 @@ export async function updateUser(id, changes) {
     sets.push(`${column} = @${field}`);
     params[field] =
       field === 'photoBase64'
-        ? [sql.NVarChar(sql.MAX), changes[field]]
+        ? [sql.Text, changes[field]]
         : field === 'isProfilePublic'
-          ? [sql.Bit, changes[field]]
+          ? [sql.Bool, changes[field]]
           : changes[field];
   }
   if (DETAIL_FIELDS.some((f) => changes[f] !== undefined)) {
     sets.push('details = @details');
     params.details = [
-      sql.NVarChar(sql.MAX),
+      sql.Text,
       JSON.stringify(pickDetails(changes, parseJson(current.details, {}))),
     ];
   }
   if (sets.length) {
-    sets.push('updated_at = SYSUTCDATETIME()');
+    sets.push('updated_at = now()');
     await query(`UPDATE users SET ${sets.join(', ')} WHERE id = @id`, params);
   }
   return findById(id);
 }
 
 export const updatePassword = (id, passwordHash) =>
-  query(
-    'UPDATE users SET password_hash = @passwordHash, updated_at = SYSUTCDATETIME() WHERE id = @id',
-    { id, passwordHash },
-  );
+  query('UPDATE users SET password_hash = @passwordHash, updated_at = now() WHERE id = @id', {
+    id,
+    passwordHash,
+  });
 
 export const listPublic = (role) =>
   rows(
     `${USER_SELECT}
-     WHERE u.is_profile_public = 1 AND (@role IS NULL OR u.role = @role)
-     ORDER BY u.rating DESC, u.name`,
-    { role: role ?? null },
+     WHERE u.is_profile_public AND (@role IS NULL OR u.role = @role)
+     ORDER BY u.rating DESC NULLS LAST, u.name`,
+    { role: [sql.Text, role ?? null] },
   );

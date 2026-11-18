@@ -1,7 +1,7 @@
 {
-  "name": "tucan-api",
+  "name": "churapp-api",
   "version": "1.0.0",
-  "description": "API REST de Tucan (empleo, comunidad y emprendimientos) sobre SQL Server",
+  "description": "API REST de ChurAPP (empleo, comunidad y emprendimientos) sobre PostgreSQL",
   "private": true,
   "type": "module",
   "main": "src/server.js",
@@ -28,7 +28,7 @@
     "fflate": "^0.8.3",
     "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.3",
-    "mssql": "^12.7.11",
+    "pg": "^8.23.1",
     "pino": "^10.4.0",
     "pino-http": "^11.0.0",
     "zod": "^4.6.7"
@@ -39,8 +39,5 @@
     "globals": "^17.13.0",
     "prettier": "^3.9.10",
     "supertest": "^7.3.1"
-  },
-  "overrides": {
-    "@azure/msal-node": "^7.1.1"
   }
 }
