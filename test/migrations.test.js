@@ -18,6 +18,14 @@ test('migrar dos veces no vuelve a aplicar nada', async () => {
   assert.equal(rows[0].name, '001_initial_schema.sql');
 });
 
+test('todas las tablas tienen seguridad por filas (la API de datos de Supabase queda cerrada)', async () => {
+  const { rows } = await getPool().query(
+    `SELECT c.relname FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+     WHERE n.nspname = 'public' AND c.relkind = 'r' AND NOT c.relrowsecurity`,
+  );
+  assert.deepEqual(rows, []);
+});
+
 test('el esquema rechaza JSON inválido y roles desconocidos', async () => {
   const insert = (role, details) =>
     getPool().query(
